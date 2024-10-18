@@ -21,7 +21,8 @@
             <div class="nav-wrapper header">
                 Compile Card Database
                 <ul class="right">
-                    <li><a data-target="filters" class="modal-trigger"><i class="material-icons left">filter_alt</i>Filter Cards</a></li>
+                    <li><a data-target="filters" class="modal-trigger"><i
+                                class="material-icons left">filter_alt</i>Filter Cards</a></li>
                     <li><a id="clear-filters"><i class="material-icons left">refresh</i>Clear Filters</a></li>
                 </ul>
             </div>
@@ -73,6 +74,20 @@
         <div id="content"></div>
     </div>
 
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li><a id="btn-group" class="btn-floating green" title="Group by Protocol"><i
+                        class="material-icons">group</i></a></li>
+            <li><a id="btn-ungroup" class="btn-floating red" title="Remove Protocol Grouping"><i
+                        class="material-icons">group_remove</i></a></li>
+        </ul>
+    </div>
+
+
     <script>
         // Using a set to store unique values for each category from the data to prevent hardcoding values.
         let uniqueProtocols = new Set();
@@ -80,6 +95,7 @@
         let uniqueKeywords = new Set();
         let uniqueSets = new Set();
         let data;
+        let groupProtocolDataToggle = true; // default to grouping the data by protocol
 
         $(document).ready(function () {
             $.getJSON('cards.json', function (response) {
@@ -116,6 +132,13 @@
                 $('#clear-filters').on('click', function () {
                     clearFilters();
                 });
+                $('#btn-group').on('click', function () {
+                    toggleGroupByProtocol(true);
+                });
+                $('#btn-ungroup').on('click', function () {
+                    toggleGroupByProtocol(false);
+                });
+                $('.fixed-action-btn').floatingActionButton();
             }).fail(function (jqxhr, textStatus, error) {
                 console.error("Failed to load card data: " + textStatus + ", " + error);
             });
@@ -209,6 +232,10 @@
             displayData(data);
         }
 
+        function toggleGroupByProtocol(group) {
+            groupProtocolDataToggle = group;
+            displayData(data);
+        }
 
         function displayData(data) {
             var tooltipElements = document.querySelectorAll('.tooltipped');
@@ -217,32 +244,44 @@
                 tooltipInstances.destroy();
             }
 
-            let groupedData = groupByProtocol(data);
+            let groupedData = groupProtocolDataToggle ? groupByProtocol(data) : data;
             let contentDiv = $('#content');
             let contentUL = $('#protocolList');
 
             contentDiv.empty();
             contentUL.empty();
 
-            $.each(groupedData, function (protocol, items) {
-                let protocolList = $('<li>');
-                let protocolClass = sanitizeProtocolName(protocol.toLowerCase());
-                let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass).text(protocol);
-                protocolHeader.append($('<span>').addClass('badge').text(items.length));    
-                protocolList.append(protocolHeader);
-
-                let protocolRow = $('<div>').addClass('collapsible-body');
+            if (groupProtocolDataToggle === false) {
+                // Handle ungrouped data
                 let rowDiv = $('<div>').addClass('row');
 
-                $.each(items, function (index, item) {
+                $.each(groupedData, function (index, item) {
                     let card = createCard(item);
                     rowDiv.append(card);
                 });
 
-                protocolRow.append(rowDiv);
-                protocolList.append(protocolRow);
-                contentUL.append(protocolList);
-            });
+                contentUL.append(rowDiv);
+            } else {
+                $.each(groupedData, function (protocol, items) {
+                    let protocolList = $('<li>');
+                    let protocolClass = sanitizeProtocolName(protocol.toLowerCase());
+                    let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass).text(protocol);
+                    protocolHeader.append($('<span>').addClass('badge').text(items.length));
+                    protocolList.append(protocolHeader);
+
+                    let protocolRow = $('<div>').addClass('collapsible-body');
+                    let rowDiv = $('<div>').addClass('row');
+
+                    $.each(items, function (index, item) {
+                        let card = createCard(item);
+                        rowDiv.append(card);
+                    });
+
+                    protocolRow.append(rowDiv);
+                    protocolList.append(protocolRow);
+                    contentUL.append(protocolList);
+                });
+            }
         }
 
         function groupByProtocol(data) {
