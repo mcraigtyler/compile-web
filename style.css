@@ -136,7 +136,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
 }
-/*2f2633*/
+
 /* Header */
 .header {
     background-color: #9154ab;
@@ -147,6 +147,12 @@ body {
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.filter-options{
+    width: 100%;
+    border: 1px solid #ffffff;
+    border-radius: 15px;
 }
 
 /* Protocol Header */
