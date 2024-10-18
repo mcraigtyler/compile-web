@@ -14,7 +14,8 @@
             "emphasis": "",
             "text": ""
         },
-        "keywords": {}
+        "keywords": {},
+        "set": "Aux 1"
     },
     {
         "protocol": "Apathy",
@@ -33,7 +34,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Apathy",
@@ -52,7 +54,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Apathy",
@@ -71,7 +74,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Apathy",
@@ -90,7 +94,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Apathy",
@@ -109,7 +114,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Darkness",
@@ -129,7 +135,8 @@
         "keywords": {
             "draw": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Darkness",
@@ -149,7 +156,8 @@
         "keywords": {
             "flip": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Darkness",
@@ -168,7 +176,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Darkness",
@@ -187,7 +196,8 @@
         },
         "keywords": {
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Darkness",
@@ -206,7 +216,8 @@
         },
         "keywords": {
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Darkness",
@@ -225,7 +236,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Death",
@@ -244,7 +256,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Death",
@@ -264,7 +277,8 @@
         "keywords": {
             "delete": true,
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Death",
@@ -283,7 +297,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Death",
@@ -302,7 +317,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Death",
@@ -321,7 +337,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Death",
@@ -340,7 +357,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Fire",
@@ -360,7 +378,8 @@
         "keywords": {
             "draw": true,
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Fire",
@@ -380,7 +399,8 @@
         "keywords": {
             "delete": true,
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Fire",
@@ -400,7 +420,8 @@
         "keywords": {
             "discard": true,
             "return": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Fire",
@@ -420,7 +441,8 @@
         "keywords": {
             "discard": true,
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Fire",
@@ -440,7 +462,8 @@
         "keywords": {
             "discard": true,
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Fire",
@@ -459,7 +482,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Gravity",
@@ -478,7 +502,8 @@
         },
         "keywords": {
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Gravity",
@@ -498,7 +523,8 @@
         "keywords": {
             "draw": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Gravity",
@@ -518,7 +544,8 @@
         "keywords": {
             "flip": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Gravity",
@@ -537,7 +564,8 @@
         },
         "keywords": {
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Gravity",
@@ -556,7 +584,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Gravity",
@@ -575,7 +604,8 @@
         },
         "keywords": {
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Hate",
@@ -594,7 +624,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Hate",
@@ -614,7 +645,8 @@
         "keywords": {
             "delete": true,
             "discard": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Hate",
@@ -633,7 +665,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Hate",
@@ -652,7 +685,8 @@
         },
         "keywords": {
             "draw": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Hate",
@@ -671,7 +705,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Hate",
@@ -690,7 +725,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Life",
@@ -710,7 +746,8 @@
         "keywords": {
             "delete": true,
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Life",
@@ -729,7 +766,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Life",
@@ -749,7 +787,8 @@
         "keywords": {
             "draw": true,
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Life",
@@ -768,7 +807,8 @@
         },
         "keywords": {
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Life",
@@ -787,7 +827,8 @@
         },
         "keywords": {
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Life",
@@ -806,7 +847,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Light",
@@ -826,7 +868,8 @@
         "keywords": {
             "draw": true,
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Light",
@@ -845,7 +888,8 @@
         },
         "keywords": {
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Light",
@@ -867,7 +911,8 @@
             "flip": true,
             "reveal": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Light",
@@ -886,7 +931,8 @@
         },
         "keywords": {
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Light",
@@ -905,7 +951,8 @@
         },
         "keywords": {
             "reveal": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Light",
@@ -924,7 +971,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Love",
@@ -944,7 +992,8 @@
         "keywords": {
             "draw": true,
             "give": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Love",
@@ -964,7 +1013,8 @@
         "keywords": {
             "draw": true,
             "refresh": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Love",
@@ -984,7 +1034,8 @@
         "keywords": {
             "give": true,
             "take": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Love",
@@ -1004,7 +1055,8 @@
         "keywords": {
             "flip": true,
             "reveal": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Love",
@@ -1023,7 +1075,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Love",
@@ -1042,7 +1095,8 @@
         },
         "keywords": {
             "draw": true
-        }
+        },
+        "set": "Aux 1"
     },
     {
         "protocol": "Metal",
@@ -1061,7 +1115,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Metal",
@@ -1080,7 +1135,8 @@
         },
         "keywords": {
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Metal",
@@ -1097,7 +1153,8 @@
             "emphasis": "",
             "text": ""
         },
-        "keywords": {}
+        "keywords": {},
+        "set": "Main 1"
     },
     {
         "protocol": "Metal",
@@ -1117,7 +1174,8 @@
         "keywords": {
             "delete": true,
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Metal",
@@ -1136,7 +1194,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Metal",
@@ -1155,7 +1214,8 @@
         },
         "keywords": {
             "delete": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Plague",
@@ -1174,7 +1234,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Plague",
@@ -1194,7 +1255,8 @@
         "keywords": {
             "discard": true,
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Plague",
@@ -1213,7 +1275,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Plague",
@@ -1232,7 +1295,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Plague",
@@ -1252,7 +1316,8 @@
         "keywords": {
             "delete": true,
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Plague",
@@ -1271,7 +1336,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Psychic",
@@ -1292,7 +1358,8 @@
             "discard": true,
             "draw": true,
             "reveal": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Psychic",
@@ -1311,7 +1378,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Psychic",
@@ -1331,7 +1399,8 @@
         "keywords": {
             "discard": true,
             "rearrange": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Psychic",
@@ -1351,7 +1420,8 @@
         "keywords": {
             "discard": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Psychic",
@@ -1371,7 +1441,8 @@
         "keywords": {
             "flip": true,
             "return": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Psychic",
@@ -1390,7 +1461,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Speed",
@@ -1409,7 +1481,8 @@
         },
         "keywords": {
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Speed",
@@ -1428,7 +1501,8 @@
         },
         "keywords": {
             "draw": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Speed",
@@ -1447,7 +1521,8 @@
         },
         "keywords": {
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Speed",
@@ -1467,7 +1542,8 @@
         "keywords": {
             "flip": true,
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Speed",
@@ -1486,7 +1562,8 @@
         },
         "keywords": {
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Speed",
@@ -1505,7 +1582,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Spirit",
@@ -1525,7 +1603,8 @@
         "keywords": {
             "draw": true,
             "refresh": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Spirit",
@@ -1546,7 +1625,8 @@
             "discard": true,
             "draw": true,
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Spirit",
@@ -1565,7 +1645,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Spirit",
@@ -1584,7 +1665,8 @@
         },
         "keywords": {
             "shift": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Spirit",
@@ -1603,7 +1685,8 @@
         },
         "keywords": {
             "swap": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Spirit",
@@ -1622,7 +1705,8 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Water",
@@ -1641,7 +1725,8 @@
         },
         "keywords": {
             "flip": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Water",
@@ -1660,7 +1745,8 @@
         },
         "keywords": {
             "play": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Water",
@@ -1680,7 +1766,8 @@
         "keywords": {
             "draw": true,
             "rearrange": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Water",
@@ -1699,7 +1786,8 @@
         },
         "keywords": {
             "return": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Water",
@@ -1718,7 +1806,8 @@
         },
         "keywords": {
             "return": true
-        }
+        },
+        "set": "Main 1"
     },
     {
         "protocol": "Water",
@@ -1737,6 +1826,7 @@
         },
         "keywords": {
             "discard": true
-        }
+        },
+        "set": "Main 1"
     }
 ]

@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Compile</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Compile Card Database</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,13 +21,45 @@
                 Compile Card Database
                 <ul class="right hide-on-med-and-down">
                     <li><a data-target="filters" class="modal-trigger"><i class="material-icons left">filter_alt</i>Filter Cards</a></li>
+                    <li><a id="clear-filters"><i class="material-icons left">refresh</i>Clear Filters</a></li>
                 </ul>
             </div>
         </nav>
     </div>
 
-    <div id="filters" class="modal filter-options">
-        I am filter
+    <div id="filters" class="modal bottom-sheet filter-options">
+        <div class="model-content">
+            <form id="filter-form">
+                Filters
+                <div class="input-field">
+                    <select id="protocol-filter" multiple>
+                        <option value="" disabled selected>Select Protocol</option>
+                    </select>
+                    <label>Protocol</label>
+                </div>
+
+                <div class="input-field">
+                    <select id="value-filter" multiple>
+                        <option value="" disabled selected>Select Value</option>
+                    </select>
+                    <label>Value</label>
+                </div>
+
+                <div class="input-field">
+                    <select id="keyword-filter" multiple>
+                        <option value="" disabled selected>Select Keyword</option>
+                    </select>
+                    <label>Keyword</label>
+                </div>
+
+                <div class="input-field">
+                    <select id="sets-filter" multiple>
+                        <option value="" disabled selected>Select Set</option>
+                    </select>
+                    <label>Set</label>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="container">
@@ -37,11 +68,41 @@
     </div>
 
     <script>
+        // Using a set to store unique values for each category from the data to prevent hardcoding values.
+        let uniqueProtocols = new Set();
+        let uniqueValues = new Set();
+        let uniqueKeywords = new Set();
+        let uniqueSets = new Set();
+        let data;
+
         $(document).ready(function () {
-            $.getJSON('cards.json', function (data) {
+            $.getJSON('cards.json', function (response) {
+                data = response;
+
+                data.forEach(function (item) {
+                    uniqueProtocols.add(item.protocol.toLowerCase());
+                    uniqueValues.add(item.value);
+                    uniqueSets.add(item.set.toLowerCase());
+                    if (item.keywords) {
+                        Object.keys(item.keywords).forEach(function (keyword) {
+                            uniqueKeywords.add(keyword);
+                        });
+                    }
+                });
+
+                let protocolsArray = Array.from(uniqueProtocols);
+                let valuesArray = Array.from(uniqueValues);
+                let setsArray = Array.from(uniqueSets);
+                let keywordsArray = Array.from(uniqueKeywords);
+
+                setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
+
                 displayData(data);
                 $('#protocolList').collapsible();
                 $('.modal').modal();
+                $('#clear-filters').on('click', function () {
+                    clearFilters();
+                });
             }).fail(function (jqxhr, textStatus, error) {
                 console.error("Failed to load card data: " + textStatus + ", " + error);
             });
@@ -58,10 +119,97 @@
             return tooltipTexts[toolTipType] || '';
         }
 
+        function setupFilters(protocols, values, keywords, sets) {
+            let protocolFilter = $('#protocol-filter');
+            protocols.sort().forEach(function (protocol) {
+                let option = $('<option>').attr('value', protocol).text(protocol);
+                protocolFilter.append(option);
+            });
+
+            let valueFilter = $('#value-filter');
+            values.sort((a, b) => a - b).forEach(function (value) {
+                let option = $('<option>').attr('value', value).text(value);
+                valueFilter.append(option);
+            });
+
+            let keywordFilter = $('#keyword-filter');
+            keywords.sort().forEach(function (keyword) {
+                let option = $('<option>').attr('value', keyword).text(keyword);
+                keywordFilter.append(option);
+            });
+
+            let setsFilter = $('#sets-filter');
+            sets.sort().forEach(function (set) {
+                let option = $('<option>').attr('value', set).text(set);
+                keywordFilter.append(option);
+            });
+
+            $('select').formSelect();
+
+            $('#filter-form').on('change', function () {
+                applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            let selectedProtocols = $('#protocol-filter').val();
+            let selectedValues = $('#value-filter').val();
+            let selectedKeywords = $('#keyword-filter').val();
+            let selectedSets = $('#sets-filter').val();
+
+            let filteredData = data.filter(function (item) {
+                let matchesProtocol = true;
+                let matchesValue = true;
+                let matchesKeyword = true;
+                let matchesSet = true;
+
+                if (selectedProtocols && selectedProtocols.length > 0) {
+                    matchesProtocol = selectedProtocols.includes(item.protocol.toLowerCase());
+                }
+
+                if (selectedValues && selectedValues.length > 0) {
+                    matchesValue = selectedValues.includes(item.value.toString());
+                }
+
+                if (selectedKeywords && selectedKeywords.length > 0) {
+                    matchesKeyword = selectedKeywords.some(function (kw) {
+                        return item.keywords && item.keywords[kw];
+                    });
+                }
+
+                if (selectedSets && selectedSets.length > 0) {
+                    matchesSet = selectedSets.includes(item.set.toLowerCase());
+                }
+
+                return matchesProtocol && matchesValue && matchesKeyword && matchesSet;
+            });
+
+            displayData(filteredData);
+        }
+
+        function clearFilters() {
+            $('#protocol-filter').val(null);
+            $('#value-filter').val(null);
+            $('#keyword-filter').val(null);
+            $('#sets-filter').val(null);
+            $('select').formSelect();
+            displayData(data);
+        }
+
+
         function displayData(data) {
+            var tooltipElements = document.querySelectorAll('.tooltipped');
+            var tooltipInstances = M.Tooltip.getInstance(tooltipElements);
+            if (tooltipInstances) {
+                tooltipInstances.destroy();
+            }
+
             let groupedData = groupByProtocol(data);
             let contentDiv = $('#content');
             let contentUL = $('#protocolList');
+
+            contentDiv.empty();
+            contentUL.empty();
 
             $.each(groupedData, function (protocol, items) {
                 let protocolList = $('<li>');
@@ -82,6 +230,14 @@
                 protocolList.append(protocolRow);
                 contentUL.append(protocolList);
             });
+
+            // Convert the sets, protocols, values, and keywords to arrays for future use. All string values are lowercased for consistency.
+            let protocolsArray = Array.from(uniqueProtocols);
+            let valuesArray = Array.from(uniqueValues);
+            let keywordsArray = Array.from(uniqueKeywords);
+            let setsArray = Array.from(uniqueSets);
+
+            setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
         }
 
         function groupByProtocol(data) {
@@ -101,7 +257,7 @@
                 let emphasisText = sectionData.emphasis ? '<span class="emphasis">' + sectionData.emphasis + '</span> ' : '';
                 let toolTipText = getTooltipText(sectionType);
                 let section = $('<div>')
-                    .addClass('card-section has-background')
+                    .addClass('card-section has-background tooltipped')
                     .attr('data-tooltip', toolTipText)
                     .html(emphasisText + sectionData.text);
                 section.tooltip();
