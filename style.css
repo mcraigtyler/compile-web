@@ -1,5 +1,6 @@
+/* HTML elements */
 body {
-    background-color: #652b4e;
+    background-color: #152130;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -89,6 +90,7 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     width: 135px;
+    border: 2px solid white;
 }
 .custom-card-title .value {
     align-items: center;
@@ -102,6 +104,7 @@ body {
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
+    border: 2px solid white;
 }
 
 /* Emphasis Text */
@@ -133,10 +136,10 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
 }
-
+/*2f2633*/
 /* Header */
 .header {
-    background-color: #5d3955;
+    background-color: #9154ab;
     color: #ffffff;
     font-size: 1.75em;
     font-weight: bold;
@@ -166,5 +169,19 @@ body {
 
 /* Override */
 .card{
+    border-radius: 15px !important;
+}
+
+.collapsible-header{    
+    border: 2px solid #ffffff;
+    border-bottom-color: #ffffff !important;
+    border-radius: 15px !important;
+}
+
+.collapsible-body{
+    margin-top: 5px;
+    background-color: #2f2633;
+    border: 2px solid #9154ab;
+    border-bottom-color: #9154ab !important;
     border-radius: 15px !important;
 }
