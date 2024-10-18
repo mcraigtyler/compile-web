@@ -1,191 +1,170 @@
-  * {
+body {
+    background-color: #652b4e;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
-  }
+    padding: 0;
+}
 
-  body {
-    font-family: sans-serif;
-    background-color: #A9A9A9;
-    padding: 0 1rem;
-  }
+/* Background Colors for Each Protocol */
+.apathy {
+    background-color: #a8a8a8 !important;
+}
+.darkness {
+    background-color: #7c7b72 !important;
+}
+.death{
+    background-color: #484a53 !important;
+}
+.fire {
+    background-color: #dab188 !important;
+}
+.gravity {
+    background-color: #905c7a !important;
+}
+.hate {
+    background-color: #a84745 !important;
+}
+.life {
+    background-color: #abaa88 !important;
+}
+.light {
+    background-color: #baae9d !important;
+}
+.love {
+    background-color: #c17a83 !important;
+}
+.metal {
+    background-color: #7a716d !important;
+}
+.plague {
+    background-color: #698158 !important;
+}
+.psychic {
+    background-color: #796f86 !important;
+}
+.speed {
+    background-color: #909bac !important;
+}
+.spirit {
+    background-color: #446e75 !important;
+}
+.water {
+    background-color: #a1afaf !important;
+}
 
-  .emphasis {
+/* Card Sections */
+.card-section {
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    flex: 1;
+    margin-bottom: 3px;
+    min-height: 33%;
+    overflow: hidden;
+    padding: 10px;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.card-section:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Custom Card Title for Displaying Protocol and Value */
+.custom-card-title {
+    align-items: flex-start;
+    color: white;
+    display: flex;
+    padding: 5px;
+}
+.custom-card-title .protocol {
+    background-color: black;
+    border-radius: 5px;
+    font-size: 1.15em;
+    margin-right: 10px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-top: 7px;
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 135px;
+}
+.custom-card-title .value {
+    align-items: center;
+    background-color: black;
+    border-radius: 5px;
+    display: flex;
+    font-size: 2.5em;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Emphasis Text */
+.emphasis {
     font-weight: bold;
     text-decoration: underline;
-  }
-  
-  .card-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    color: white;
-    background-color: #36454F;
-    width: 250px;
-    padding: 1rem;
+}
+
+/* Fixed Height Card */
+.fixed-height-card {
     border-radius: 10px;
-    justify-self: center;
-    margin: .75rem;
-  }
-  .card--apathy {
-    background: #514F4D;
-  }
-  .card--darkness {
-    background: #343434;
-  }
-  .card--death {
-    background: #301934;
-  }
-  .card--fire {
-    background: #D22B2B;
-  }
-  .card--gravity {
-    background: #702963;
-  }
-  .card--hate {
-    background: #874245;
-  }
-  .card--life {
-    background: #088F8F;
-  }
-  .card--light {
-    background: #E97451;
-  }
-  .card--love {
-    background: #E16465;
-  }
-  .card--metal {
-    background: #808080;
-  }
-  .card--plague {
-    background: #097969;
-  }
-  .card--psychic {
-    background: #800080;
-  }
-  .card--speed {
-    background: #7393B3;
-  }
-  .card--spirit {
-    background: #00008B;
-  }
-  .card--water {
-    background: #0047AB;
-  }
-
-  .card__top {
     display: flex;
-  }
-
-  .card__protocol {
-    border: 1px solid white;
-    border-right: 0;
-    padding: 2px;
-    align-self: start;
-    min-width: 40%;
-    background-color: #36454F;
-  }
-
-  .card__value {
-    font-size: 40px;
-    border: 1px solid white;
-    padding: 5px;
-    background-color: #36454F;
-  }
-
-  .card__box {
-    border: 1px solid white;
-    border-radius: 5px;
-    margin: .25rem 0;
-    height: 75px;
-    padding: 5px 10px;
+    flex-direction: column;
+    height: 450px;
+    width: 325px;
+}
+.fixed-height-card .card-content {
     display: flex;
-    align-items: center;
-  }
-  .card-box--opaque {
-    background-color: #36454F;
-    opacity: 90%;
-  }
-
-  /* Filters */
-
-  input[type="checkbox"] {
-    width: 1.5rem;
-    height: 1.5rem;
-    accent-color: black;
-  }
-
-  .filters {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .filters__filter {
-    padding: 1rem;
-    border: 2px solid black;
-    margin: 1rem;
-    align-self: stretch;
-  }
-
-  .filters__title {
-    text-align: center;
-  }
-
-  .filters__btn-container {
-    margin: 1rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .filters__btn {
-    margin: .5rem;
-    padding: .5rem;
-    background-color: black;
-    color: white;
-    border: 2px solid black;
-    outline: none;
-    transition-duration: .35s;
-  }
-  .filters__btn:hover {
-    cursor: pointer;
-    background-color: white;
-    color: black;
-  }
-
-  .filters__list {
+    flex: 1;
+    flex-direction: column;
     padding: 0;
-    margin: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-  }
+}
 
-  .filters__list-item {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    /* margin: .5rem 0; */
-  }
-  .filters__list-item:hover {
-    cursor: pointer;
-  }
+.blank-section{
+    background-color: rgba(255,255,255,0.5);    
+}
 
-  .filters__input {
-    margin-right: .5rem;
-  }
-  .filters__input:hover {
-    cursor: pointer;
-  }
+.has-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
 
-  .filters__label {
-    font-size: 18px;
-  }
-  .filters__label:hover {
-    cursor: pointer;
-  }
+/* Header */
+.header {
+    background-color: #5d3955;
+    color: #ffffff;
+    font-size: 1.75em;
+    font-weight: bold;
+    text-align: center; 
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
+/* Protocol Header */
+.protocol-header {
+    color: #ffffff;
+    font-size: 2em;
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+/* Section Wrapper */
+.section-wrapper {
+    box-sizing: border-box;
+    flex: 1;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Override */
+.card{
+    border-radius: 15px !important;
+}

@@ -1,190 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Compile Card Database</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Compile</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+
 <body>
-
-    <div class="filters">
-        <div class="filters__filter">
-            <h2 class="filters__title">Protocol</h2>
-            <div class="filters__btn-container">
-                <button class="filters__btn js_select-all-protocol">Select All</button>
-                <button class="filters__btn js_remove-all-protocol">Remove All</button>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="header">
+                Compile Card Database
             </div>
-            <ul class="filters__list">
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_apathy" checked type="checkbox" id="apathy" name="checkbox" value="1">
-                    <label class="filters__label" for="apathy">Apathy</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_darkness" checked type="checkbox" id="darkness" name="checkbox" value="1">
-                    <label class="filters__label" for="darkness">Darkness</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_death" checked type="checkbox" id="death" name="checkbox" value="1">
-                    <label class="filters__label" for="death">Death</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_fire" checked type="checkbox" id="fire" name="checkbox" value="1">
-                    <label class="filters__label" for="fire">Fire</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_gravity" checked type="checkbox" id="gravity" name="checkbox" value="1">
-                    <label class="filters__label" for="gravity">Gravity</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_hate" checked type="checkbox" id="hate" name="checkbox" value="1">
-                    <label class="filters__label" for="hate">Hate</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_life" checked type="checkbox" id="life" name="checkbox" value="1">
-                    <label class="filters__label" for="life">Life</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_light" checked type="checkbox" id="light" name="checkbox" value="1">
-                    <label class="filters__label" for="light">Light</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_love" checked type="checkbox" id="love" name="checkbox" value="1">
-                    <label class="filters__label" for="love">Love</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_metal" checked type="checkbox" id="metal" name="checkbox" value="1">
-                    <label class="filters__label" for="metal">Metal</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_plague" checked type="checkbox" id="plague" name="checkbox" value="1">
-                    <label class="filters__label" for="plague">Plague</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_psychic" checked type="checkbox" id="psychic" name="checkbox" value="1">
-                    <label class="filters__label" for="psychic">Psychic</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_speed" checked type="checkbox" id="speed" name="checkbox" value="1">
-                    <label class="filters__label" for="speed">Speed</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_spirit" checked type="checkbox" id="spirit" name="checkbox" value="1">
-                    <label class="filters__label" for="spirit">Spirit</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_protocol js_water" checked type="checkbox" id="water" name="checkbox" value="1">
-                    <label class="filters__label" for="water">Water</label>
-                </li>
-            </ul>
-        </div>
-        <div class="filters__filter">
-            <h2 class="filters__title">Value</h2>
-            <div class="filters__btn-container">
-                <button class="filters__btn js_select-all-value">Select All</button>
-                <button class="filters__btn js_remove-all-value">Remove All</button>
-            </div>
-            <ul class="filters__list">
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_zero" checked type="checkbox" id="zero" name="checkbox" value="1">
-                    <label class="filters__label" for="zero">0</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_one" checked type="checkbox" id="one" name="checkbox" value="1">
-                    <label class="filters__label" for="one">1</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_two" checked type="checkbox" id="two" name="checkbox" value="1">
-                    <label class="filters__label" for="two">2</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_three" checked type="checkbox" id="three" name="checkbox" value="1">
-                    <label class="filters__label" for="three">3</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_four" checked type="checkbox" id="four" name="checkbox" value="1">
-                    <label class="filters__label" for="four">4</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_five" checked type="checkbox" id="five" name="checkbox" value="1">
-                    <label class="filters__label" for="five">5</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_value js_six" checked type="checkbox" id="six" name="checkbox" value="1">
-                    <label class="filters__label" for="six">6</label>
-                </li>
-            </ul>
-        </div>
-        <div class="filters__filter">
-            <h2 class="filters__title">Keywords</h2>
-            <div class="filters__btn-container">
-                <button class="filters__btn js_select-all-keywords">Select All</button>
-                <button class="filters__btn js_remove-all-keywords">Remove All</button>
-            </div>
-            <ul class="filters__list">
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_delete" type="checkbox" id="delete" name="checkbox" value="1">
-                    <label class="filters__label" for="delete">Delete</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_discard" type="checkbox" id="discard" name="checkbox" value="1">
-                    <label class="filters__label" for="discard">Discard</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_draw" type="checkbox" id="draw" name="checkbox" value="1">
-                    <label class="filters__label" for="draw">Draw</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_flip" type="checkbox" id="flip" name="checkbox" value="1">
-                    <label class="filters__label" for="flip">Flip</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_give" type="checkbox" id="give" name="checkbox" value="1">
-                    <label class="filters__label" for="give">Give</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_play" type="checkbox" id="play" name="checkbox" value="1">
-                    <label class="filters__label" for="play">Play</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_rearrange" type="checkbox" id="rearrange" name="checkbox" value="1">
-                    <label class="filters__label" for="rearrange">Rearrange</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_return" type="checkbox" id="return" name="checkbox" value="1">
-                    <label class="filters__label" for="return">Return</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_reveal" type="checkbox" id="reveal" name="checkbox" value="1">
-                    <label class="filters__label" for="reveal">Reveal</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_refresh" type="checkbox" id="refresh" name="checkbox" value="1">
-                    <label class="filters__label" for="refresh">Refresh</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_shift" type="checkbox" id="shift" name="checkbox" value="1">
-                    <label class="filters__label" for="shift">Shift</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_swap" type="checkbox" id="swap" name="checkbox" value="1">
-                    <label class="filters__label" for="swap">Swap</label>
-                </li>
-                <li class="filters__list-item">
-                    <input class="filters__input js_criteria js_keyword js_take" type="checkbox" id="take" name="checkbox" value="1">
-                    <label class="filters__label" for="take">Take</label>
-                </li>
-            </ul>
-        </div>
+        </nav>
     </div>
 
-    <div class="card-container">
-        
+    <div class="container">
+        <ul id="protocolList" class="collapsible popout"></ul>
+        <div id="content"></div>
     </div>
 
+    <script>
+        $(document).ready(function () {
+            $.getJSON('cards.json', function (data) {
+                displayData(data);
+                $('#protocolList').collapsible();
+            }).fail(function (jqxhr, textStatus, error) {
+                console.error("Failed to load card data: " + textStatus + ", " + error);
+            });
+        });
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="module" src="./script.js"></script>
-    
+        const tooltipTexts = {
+            'top': 'Persistent: While this card is face-up, this passive text is never covered.',
+            'middle': 'Immediate: Resolve this active text upon card play/flip/uncover.',
+            'bottom': 'Auxiliary: This passive text is often, but not limited to, triggered effects, but is only viable when uncovered',
+        };
+
+        // Using a helper function to get the tooltip text based on the type in case functionality needs to be expanded later
+        function getTooltipText(toolTipType) {
+            return tooltipTexts[toolTipType] || '';
+        }
+
+        function displayData(data) {
+            let groupedData = groupByProtocol(data);
+            let contentDiv = $('#content');
+            let contentUL = $('#protocolList');
+
+            $.each(groupedData, function (protocol, items) {
+                let protocolList = $('<li>');
+                let protocolClass = sanitizeProtocolName(protocol.toLowerCase());
+                let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass).text(protocol);
+
+                protocolList.append(protocolHeader);
+
+                let protocolRow = $('<div>').addClass('collapsible-body');
+                let rowDiv = $('<div>').addClass('row');
+
+                $.each(items, function (index, item) {
+                    let card = createCard(item);
+                    rowDiv.append(card);
+                });
+
+                protocolRow.append(rowDiv);
+                protocolList.append(protocolRow);
+                contentUL.append(protocolList);
+            });
+        }
+
+        function groupByProtocol(data) {
+            let grouped = {};
+            data.forEach(function (item) {
+                let protocol = item.protocol || 'Unknown';
+                if (!grouped[protocol]) {
+                    grouped[protocol] = [];
+                }
+                grouped[protocol].push(item);
+            });
+            return grouped;
+        }
+
+        function createCardSection(sectionData, sectionType) {
+            if (sectionData && sectionData.text) {
+                let emphasisText = sectionData.emphasis ? '<span class="emphasis">' + sectionData.emphasis + '</span> ' : '';
+                let toolTipText = getTooltipText(sectionType);
+                let section = $('<div>')
+                    .addClass('card-section has-background')
+                    .attr('data-tooltip', toolTipText)
+                    .html(emphasisText + sectionData.text);
+                section.tooltip();
+                return section;
+            } else {
+                let section = $('<div>')
+                    .addClass('card-section blank-section')
+                    .text('');
+                return section;
+            }
+        }
+
+        function createCard(item) {
+            let colDiv = $('<div>').addClass('col s12 m6 l4');
+            let protocolClass = sanitizeProtocolName(item.protocol.toLowerCase());
+            let cardDiv = $('<div>').addClass('card fixed-height-card ' + protocolClass);
+            let cardContentDiv = $('<div>').addClass('card-content');
+            let cardTitle = $('<div>').addClass('custom-card-title');
+            let protocolDiv = $('<div>').addClass('protocol').text(item.protocol);
+            let valueDiv = $('<div>').addClass('value').text(item.value);
+
+            cardTitle.append(protocolDiv).append(valueDiv);
+            cardContentDiv.append(cardTitle);
+
+            let sectionWrapper = $('<div>').addClass('section-wrapper');
+
+            sectionWrapper.append(createCardSection(item.top, 'top'));
+            sectionWrapper.append(createCardSection(item.middle, 'middle'));
+            sectionWrapper.append(createCardSection(item.bottom, 'bottom'));
+
+            cardContentDiv.append(sectionWrapper);
+            cardDiv.append(cardContentDiv);
+            colDiv.append(cardDiv);
+
+            return colDiv;
+        }
+
+        function sanitizeProtocolName(protocol) {
+            return protocol.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
+        }
+
+    </script>
 </body>
+
 </html>
