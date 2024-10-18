@@ -276,7 +276,7 @@
         }
 
         function createCard(item) {
-            let colDiv = $('<div>').addClass('col s12 m6 l4');
+            let colDiv = $('<div>').addClass('col');
             let protocolClass = sanitizeProtocolName(item.protocol.toLowerCase());
             let cardDiv = $('<div>').addClass('card fixed-height-card ' + protocolClass);
             let cardContentDiv = $('<div>').addClass('card-content');
