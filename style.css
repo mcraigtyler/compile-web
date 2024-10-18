@@ -149,6 +149,14 @@ body {
     text-transform: uppercase;
 }
 
+#filter-form label{
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.75em;
+    font-weight: bold;
+}
+
 .filter-options{
     width: 100%;
     border: 1px solid #ffffff;
@@ -173,7 +181,7 @@ body {
     width: 100%;
 }
 
-/* Override */
+/* Overrides */
 .card{
     border-radius: 15px !important;
     border: 2px solid #ffffff !important;
@@ -191,4 +199,9 @@ body {
     border: 2px solid #9154ab;
     border-bottom-color: #9154ab !important;
     border-radius: 15px !important;
+}
+
+.modal{
+    width: 80% !important;
+    min-height: 500px !important;
 }

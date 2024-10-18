@@ -27,10 +27,12 @@
         </nav>
     </div>
 
-    <div id="filters" class="modal bottom-sheet filter-options">
+    <div id="filters" class="modal filter-options">
         <div class="model-content">
             <form id="filter-form">
-                Filters
+                <div class="header">
+                    Filters
+                </div>
                 <div class="input-field">
                     <select id="protocol-filter" multiple>
                         <option value="" disabled selected>Select Protocol</option>
@@ -77,23 +79,30 @@
 
         $(document).ready(function () {
             $.getJSON('cards.json', function (response) {
+                console.log("Data loaded successfully");
+                // make sure the filter lists are cleared out before adding new data. 
+                uniqueProtocols.clear();
+                uniqueValues.clear();
+                uniqueKeywords.clear();
+                uniqueSets.clear();
+
                 data = response;
 
                 data.forEach(function (item) {
-                    uniqueProtocols.add(item.protocol.toLowerCase());
-                    uniqueValues.add(item.value);
-                    uniqueSets.add(item.set.toLowerCase());
+                    uniqueProtocols.add(item.protocol.trim().toLowerCase());
+                    uniqueValues.add(Number(item.value));                    
                     if (item.keywords) {
                         Object.keys(item.keywords).forEach(function (keyword) {
-                            uniqueKeywords.add(keyword);
+                            uniqueKeywords.add(keyword.trim().toLowerCase());
                         });
                     }
+                    uniqueSets.add(item.set.toLowerCase());
                 });
 
                 let protocolsArray = Array.from(uniqueProtocols);
                 let valuesArray = Array.from(uniqueValues);
-                let setsArray = Array.from(uniqueSets);
                 let keywordsArray = Array.from(uniqueKeywords);
+                let setsArray = Array.from(uniqueSets);
 
                 setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
 
@@ -141,7 +150,7 @@
             let setsFilter = $('#sets-filter');
             sets.sort().forEach(function (set) {
                 let option = $('<option>').attr('value', set).text(set);
-                keywordFilter.append(option);
+                setsFilter.append(option);
             });
 
             $('select').formSelect();
@@ -229,15 +238,7 @@
                 protocolRow.append(rowDiv);
                 protocolList.append(protocolRow);
                 contentUL.append(protocolList);
-            });
-
-            // Convert the sets, protocols, values, and keywords to arrays for future use. All string values are lowercased for consistency.
-            let protocolsArray = Array.from(uniqueProtocols);
-            let valuesArray = Array.from(uniqueValues);
-            let keywordsArray = Array.from(uniqueKeywords);
-            let setsArray = Array.from(uniqueSets);
-
-            setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
+            });            
         }
 
         function groupByProtocol(data) {
