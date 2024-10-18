@@ -141,12 +141,13 @@ body {
 .header {
     background-color: #9154ab;
     color: #ffffff;
+    padding-left: 10px;
     font-size: 1.75em;
     font-weight: bold;
-    text-align: center; 
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
+    min-width: 900px !important;
 }
 
 #filter-form label{

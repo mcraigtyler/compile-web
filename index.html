@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <title>Compile Card Database</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,9 +18,9 @@
 <body>
     <div class="navbar-fixed">
         <nav>
-            <div class="header">
+            <div class="nav-wrapper header">
                 Compile Card Database
-                <ul class="right hide-on-med-and-down">
+                <ul class="right">
                     <li><a data-target="filters" class="modal-trigger"><i class="material-icons left">filter_alt</i>Filter Cards</a></li>
                     <li><a id="clear-filters"><i class="material-icons left">refresh</i>Clear Filters</a></li>
                 </ul>
@@ -93,7 +94,7 @@
 
                 data.forEach(function (item) {
                     uniqueProtocols.add(item.protocol.trim().toLowerCase());
-                    uniqueValues.add(Number(item.value));                    
+                    uniqueValues.add(Number(item.value));
                     if (item.keywords) {
                         Object.keys(item.keywords).forEach(function (keyword) {
                             uniqueKeywords.add(keyword.trim().toLowerCase());
@@ -241,7 +242,7 @@
                 protocolRow.append(rowDiv);
                 protocolList.append(protocolRow);
                 contentUL.append(protocolList);
-            });            
+            });
         }
 
         function groupByProtocol(data) {
