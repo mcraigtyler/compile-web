@@ -197,6 +197,15 @@ body {
 
 
 /* Overrides */
+
+.badge{
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    font-size: 1.25em !important;
+}
+
 .card{
     border-radius: 15px !important;
     border: 2px solid #ffffff !important;
