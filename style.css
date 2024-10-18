@@ -163,6 +163,7 @@ body {
     border-radius: 15px;
 }
 
+
 /* Protocol Header */
 .protocol-header {
     color: #ffffff;
@@ -204,4 +205,15 @@ body {
 .modal{
     width: 80% !important;
     min-height: 500px !important;
+}
+
+.select-wrapper{
+    margin-bottom: 20px !important;
+}
+
+.select-dropdown{
+    padding-top: 15px !important;
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
 }
