@@ -250,8 +250,8 @@
         "protocol": "Death",
         "value": 1,
         "top": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>Start:</span> You may draw 1 card. If you do, delete 1 other card, then delete this card.</div>"
+            "emphasis": "Start:",
+            "text": "You may draw 1 card. If you do, delete 1 other card, then delete this card."
         },
         "middle": {
             "emphasis": "",
@@ -354,8 +354,8 @@
             "text": "Flip 1 other card. Draw 2 cards."
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>When this card would be covered:</span> First, draw 1 card and flip 1 other card.</div>"
+            "emphasis": "When this card would be covered:",
+            "text": "First, draw 1 card and flip 1 other card."
         },
         "keywords": {
             "draw": true,
@@ -414,8 +414,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='empahsis'>End:</span> You may discard 1 card. If you do, flip 1 card.</div>"
+            "emphasis": "End:",
+            "text": "You may discard 1 card. If you do, flip 1 card."
         },
         "keywords": {
             "discard": true,
@@ -639,8 +639,8 @@
         "protocol": "Hate",
         "value": 3,
         "top": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>After you delete cards:</span> Draw 1 card.</div>"
+            "emphasis": "After you delete cards:",
+            "text": "Draw 1 card."
         },
         "middle": {
             "emphasis": "",
@@ -666,8 +666,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>When this card would be covered:</span> First, delete the lowest value covered card in this line.</div>"
+            "emphasis": "When this card would be covered:",
+            "text": "First, delete the lowest value covered card in this line."
         },
         "keywords": {
             "delete": true
@@ -704,8 +704,8 @@
             "text": "Play the top card of your deck face-down in each line where you have a card."
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>When this card would be covered:</span> First, delete this card.</div>"
+            "emphasis": "When this card would be covered:",
+            "text": "First, delete this card."
         },
         "keywords": {
             "delete": true,
@@ -763,8 +763,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>When this card would be covered:</span> First, play the top card of your deck face-down in another line.</div>"
+            "emphasis": "When this card would be covered:",
+            "text": "First, play the top card of your deck face-down in another line."
         },
         "keywords": {
             "play": true
@@ -840,8 +840,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>End:</span> Draw 1 card.</div>"
+            "emphasis": "End:",
+            "text": "Draw 1 card."
         },
         "keywords": {
             "draw": true
@@ -938,8 +938,8 @@
             "text": "Draw the top card of your opponent's deck."
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>End:</span> You may give 1 card from your hand to your opponent. If you do, draw 2 cards.</div>"
+            "emphasis": "End:",
+            "text": "You may give 1 card from your hand to your opponent. If you do, draw 2 cards."
         },
         "keywords": {
             "draw": true,
@@ -1142,8 +1142,8 @@
         "protocol": "Metal",
         "value": 6,
         "top": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>When this card would be covered or flipped:</span> First, delete this card.</div>"
+            "emphasis": "When this card would be covered or flipped:",
+            "text": "First, delete this card."
         },
         "middle": {
             "emphasis": "",
@@ -1180,8 +1180,8 @@
         "protocol": "Plague",
         "value": 1,
         "top": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>After your opponent discards cards:</span> Draw 1 card.</div>"
+            "emphasis": "After your opponent discards cards:",
+            "text": "Draw 1 card."
         },
         "middle": {
             "emphasis": "",
@@ -1246,8 +1246,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>End:</span> Your opponent deletes 1 of their face-down cards. You may flip this card.</div>"
+            "emphasis": "End:",
+            "text": "Your opponent deletes 1 of their face-down cards. You may flip this card."
         },
         "keywords": {
             "delete": true,
@@ -1306,8 +1306,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>Start:</span> Flip this card.</div>"
+            "emphasis": "Start:",
+            "text": "Flip this card."
         },
         "keywords": {
             "flip": true
@@ -1365,8 +1365,8 @@
             "text": ""
         },
         "bottom": {
-            "emphasis": "",
-            "text": "<div><span class='emphasis'>End:</span> You may return 1 of your opponent's cards. If you do, flip this card.</div>"
+            "emphasis": "End:",
+            "text": "You may return 1 of your opponent's cards. If you do, flip this card."
         },
         "keywords": {
             "flip": true,
