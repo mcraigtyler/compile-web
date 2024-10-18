@@ -293,6 +293,10 @@
             sectionWrapper.append(createCardSection(item.bottom, 'bottom'));
 
             cardContentDiv.append(sectionWrapper);
+
+            let setDiv = $('<div>').addClass('set-text').text(item.set.toUpperCase() || '');
+            cardContentDiv.append(setDiv);
+
             cardDiv.append(cardContentDiv);
             colDiv.append(cardDiv);
 
