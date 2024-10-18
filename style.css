@@ -170,6 +170,7 @@ body {
 /* Override */
 .card{
     border-radius: 15px !important;
+    border: 2px solid #ffffff !important;
 }
 
 .collapsible-header{    
