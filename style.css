@@ -230,6 +230,13 @@ body {
     min-height: 500px !important;
 }
 
+.row{
+    display: flex !important;    
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 .select-wrapper{
     margin-bottom: 20px !important;
 }
