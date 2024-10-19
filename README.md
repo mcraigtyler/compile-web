@@ -1,4 +1,4 @@
-# [Compile Card Database]
+# Compile Card Database
 
 _This repo wouldn't be possible without Ryan Scherr's work on [Compile database](https://ryanascherr.github.io/compile/)_
 
