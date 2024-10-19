@@ -218,6 +218,10 @@ body {
     font-size: 1.25em !important;
 }
 
+.btn{
+    background-color: #152130 !important;
+}
+
 .card{
     border-radius: 15px !important;
     border: 2px solid #ffffff !important;
@@ -242,11 +246,15 @@ body {
     max-width: none !important;
 }
 
-.modal{
-    width: 80% !important;
-    min-height: 500px !important;
+.input-field {
+ max-width: 90% !important;
+ margin-left: 25px !important;
+ margin-top: 10px !important;
 }
 
+.modal{
+    width: 80% !important;
+}
 
 .row{
     display: flex !important;    
