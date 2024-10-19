@@ -128,11 +128,16 @@
                 setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
 
                 const compressedState = getCompressedStateFromURL();
-
                 if (compressedState) {
                     applyStateFromCompressedString(compressedState);
                 } else {
-                    displayData(data);
+                    const queryParams = getQueryParams();
+                    if (queryParams.hasFilters) {
+                        const filters = constructFiltersFromQueryParams(queryParams);
+                        applyFiltersFromState(filters);
+                    } else {
+                        displayData(data);
+                    }
                 }
 
                 $('#protocolList').collapsible();
@@ -384,19 +389,6 @@
             return protocol.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
         }
 
-        function getQueryParams() {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-
-            return {
-                protocols: urlParams.getAll('protocol'),
-                values: urlParams.getAll('value'),
-                keywords: urlParams.getAll('keyword'),
-                sets: urlParams.getAll('set'),
-                groupByProtocol: urlParams.get('groupByProtocol'),
-            };
-        }
-
         function applyFiltersFromQueryParams(params) {
             if (params.protocols.length > 0) {
                 $('#protocol-filter').val(params.protocols);
@@ -462,7 +454,12 @@
         }
 
         function updateURLWithCompressedState(compressedState) {
-            const url = new URL(window.location.href);            
+            const url = new URL(window.location.href); 
+            url.searchParams.delete('protocol');
+            url.searchParams.delete('value');
+            url.searchParams.delete('keyword');
+            url.searchParams.delete('set');
+            url.searchParams.delete('groupByProtocol');           
             url.searchParams.delete('state');
             if (compressedState) {
                 url.searchParams.set('state', compressedState);
@@ -477,15 +474,59 @@
             return compressedState;
         }
 
+        function getQueryParams() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            const protocols = urlParams.getAll('protocol');
+            const values = urlParams.getAll('value');
+            const keywords = urlParams.getAll('keyword');
+            const sets = urlParams.getAll('set');
+            const groupByProtocol = urlParams.get('groupByProtocol');
+
+            const hasFilters =
+                protocols.length > 0 ||
+                values.length > 0 ||
+                keywords.length > 0 ||
+                sets.length > 0 ||
+                groupByProtocol !== null;
+
+            return {
+                protocols,
+                values,
+                keywords,
+                sets,
+                groupByProtocol,
+                hasFilters
+            };
+        }
+
+        function constructFiltersFromQueryParams(params) {
+            const groupByProtocolFlag = params.groupByProtocol !== null ? params.groupByProtocol === 'true' : true; 
+            return {
+                protocols: params.protocols || [],
+                values: params.values || [],
+                keywords: params.keywords || [],
+                sets: params.sets || [],
+                groupByProtocol: groupByProtocolFlag
+            };
+        }
+
         function decompressString(compressedStr) {
             return LZString.decompressFromEncodedURIComponent(compressedStr);
         }
 
         function applyStateFromCompressedString(compressedState) {
-            if (compressedState) {
+            try {
                 const decompressedStr = decompressString(compressedState);
                 const filters = JSON.parse(decompressedStr);
                 applyFiltersFromState(filters);
+            } catch (error) {
+                console.error('Failed to apply state from URL:', error);
+                const url = new URL(window.location.href); // remove invalid state from URL and display all data
+                url.searchParams.delete('state');
+                window.history.replaceState({}, '', url);                
+                displayData(data);
             }
         }
 
