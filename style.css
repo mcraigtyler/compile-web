@@ -225,6 +225,11 @@ body {
     border-radius: 15px !important;
 }
 
+.container{
+    width: 90% !important;
+    max-width: none !important;
+}
+
 .modal{
     width: 80% !important;
     min-height: 500px !important;
