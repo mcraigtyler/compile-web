@@ -4,6 +4,11 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url('img/background_1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center 65px;
 }
 
 /* Background Colors for Each Protocol */
@@ -219,7 +224,7 @@ body {
 
 .collapsible-body{
     margin-top: 5px;
-    background-color: #2f2633;
+    background-color: rgba(47, 38, 51, 0.8);
     border: 2px solid #9154ab;
     border-bottom-color: #9154ab !important;
     border-radius: 15px !important;
