@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
 </head>
 
 <body>
@@ -126,15 +127,13 @@
 
                 setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
 
-                const queryParams = getQueryParams();
+                const compressedState = getCompressedStateFromURL();
 
-                applyFiltersFromQueryParams(queryParams);
-
-                if (queryParams.groupByProtocol !== null) {
-                    groupProtocolDataToggle = queryParams.groupByProtocol === 'true';
+                if (compressedState) {
+                    applyStateFromCompressedString(compressedState);
+                } else {
+                    displayData(data);
                 }
-
-                applyFilters();
 
                 $('#protocolList').collapsible();
                 $('.modal').modal();
@@ -202,14 +201,32 @@
             let selectedKeywords = $('#keyword-filter').val();
             let selectedSets = $('#sets-filter').val();
 
-            updateURLWithFilters({
+            const isDefaultState =
+                selectedProtocols.length === 0 &&
+                selectedValues.length === 0 &&
+                selectedKeywords.length === 0 &&
+                selectedSets.length === 0 &&
+                groupProtocolDataToggle === true; // default state
+
+            const filters = {
                 protocols: selectedProtocols,
                 values: selectedValues,
                 keywords: selectedKeywords,
                 sets: selectedSets,
                 groupByProtocol: groupProtocolDataToggle,
-            });
+            };
 
+            const serializedFilters = serializeFilters(filters);
+            const compressedState = compressString(serializedFilters);
+
+            if (isDefaultState) {
+                updateURLWithCompressedState(null);
+            } else {
+                const serializedFilters = serializeFilters(filters);
+                const compressedState = compressString(serializedFilters);
+                updateURLWithCompressedState(compressedState);
+            }
+            
             let filteredData = data.filter(function (item) {
                 let matchesProtocol = true;
                 let matchesValue = true;
@@ -246,26 +263,15 @@
             $('#keyword-filter').val(null);
             $('#sets-filter').val(null);
             $('select').formSelect();
-            updateURLWithFilters({
-                protocols: [],
-                values: [],
-                keywords: [],
-                sets: [],
-                groupByProtocol: groupProtocolDataToggle,
-            });
-            displayData(data);
+            
+            groupProtocolDataToggle = true;
+
+            applyFilters();
         }
 
         function toggleGroupByProtocol(group) {
             groupProtocolDataToggle = group;
-            updateURLWithFilters({
-                protocols: $('#protocol-filter').val() || [],
-                values: $('#value-filter').val() || [],
-                keywords: $('#keyword-filter').val() || [],
-                sets: $('#sets-filter').val() || [],
-                groupByProtocol: groupProtocolDataToggle,
-            });
-            displayData(data);
+            applyFilters();
         }
 
         function displayData(data) {
@@ -445,6 +451,54 @@
             url.searchParams.set('groupByProtocol', filters.groupByProtocol);
 
             window.history.replaceState({}, '', url);
+        }
+
+        function serializeFilters(filters) {
+            return JSON.stringify(filters);
+        }
+
+        function compressString(str) {
+            return LZString.compressToEncodedURIComponent(str);
+        }
+
+        function updateURLWithCompressedState(compressedState) {
+            const url = new URL(window.location.href);            
+            url.searchParams.delete('state');
+            if (compressedState) {
+                url.searchParams.set('state', compressedState);
+            }
+            window.history.replaceState({}, '', url);
+        }
+
+        function getCompressedStateFromURL() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const compressedState = urlParams.get('state');
+            return compressedState;
+        }
+
+        function decompressString(compressedStr) {
+            return LZString.decompressFromEncodedURIComponent(compressedStr);
+        }
+
+        function applyStateFromCompressedString(compressedState) {
+            if (compressedState) {
+                const decompressedStr = decompressString(compressedState);
+                const filters = JSON.parse(decompressedStr);
+                applyFiltersFromState(filters);
+            }
+        }
+
+        function applyFiltersFromState(filters) {
+            $('#protocol-filter').val(filters.protocols);
+            $('#value-filter').val(filters.values);
+            $('#keyword-filter').val(filters.keywords);
+            $('#sets-filter').val(filters.sets);
+            $('select').formSelect();
+
+            groupProtocolDataToggle = filters.groupByProtocol;
+
+            applyFilters();
         }
 
 
