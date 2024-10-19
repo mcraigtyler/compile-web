@@ -126,7 +126,16 @@
 
                 setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
 
-                displayData(data);
+                const queryParams = getQueryParams();
+
+                applyFiltersFromQueryParams(queryParams);
+
+                if (queryParams.groupByProtocol !== null) {
+                    groupProtocolDataToggle = queryParams.groupByProtocol === 'true';
+                }
+
+                applyFilters();
+
                 $('#protocolList').collapsible();
                 $('.modal').modal();
                 $('#clear-filters').on('click', function () {
@@ -193,6 +202,14 @@
             let selectedKeywords = $('#keyword-filter').val();
             let selectedSets = $('#sets-filter').val();
 
+            updateURLWithFilters({
+                protocols: selectedProtocols,
+                values: selectedValues,
+                keywords: selectedKeywords,
+                sets: selectedSets,
+                groupByProtocol: groupProtocolDataToggle,
+            });
+
             let filteredData = data.filter(function (item) {
                 let matchesProtocol = true;
                 let matchesValue = true;
@@ -229,11 +246,25 @@
             $('#keyword-filter').val(null);
             $('#sets-filter').val(null);
             $('select').formSelect();
+            updateURLWithFilters({
+                protocols: [],
+                values: [],
+                keywords: [],
+                sets: [],
+                groupByProtocol: groupProtocolDataToggle,
+            });
             displayData(data);
         }
 
         function toggleGroupByProtocol(group) {
             groupProtocolDataToggle = group;
+            updateURLWithFilters({
+                protocols: $('#protocol-filter').val() || [],
+                values: $('#value-filter').val() || [],
+                keywords: $('#keyword-filter').val() || [],
+                sets: $('#sets-filter').val() || [],
+                groupByProtocol: groupProtocolDataToggle,
+            });
             displayData(data);
         }
 
@@ -346,6 +377,76 @@
         function sanitizeProtocolName(protocol) {
             return protocol.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
         }
+
+        function getQueryParams() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            return {
+                protocols: urlParams.getAll('protocol'),
+                values: urlParams.getAll('value'),
+                keywords: urlParams.getAll('keyword'),
+                sets: urlParams.getAll('set'),
+                groupByProtocol: urlParams.get('groupByProtocol'),
+            };
+        }
+
+        function applyFiltersFromQueryParams(params) {
+            if (params.protocols.length > 0) {
+                $('#protocol-filter').val(params.protocols);
+            }
+
+            if (params.values.length > 0) {
+                $('#value-filter').val(params.values);
+            }
+
+            if (params.keywords.length > 0) {
+                $('#keyword-filter').val(params.keywords);
+            }
+
+            if (params.sets.length > 0) {
+                $('#sets-filter').val(params.sets);
+            }
+            $('select').formSelect();
+        }
+
+        function updateUIWithFilters(params) {
+            applyFilters();
+            if (params.groupByProtocol !== null) {
+                groupProtocolDataToggle = params.groupByProtocol === 'true';
+            }
+        }
+
+        function updateURLWithFilters(filters) {
+            const url = new URL(window.location.href);
+
+            url.searchParams.delete('protocol');
+            url.searchParams.delete('value');
+            url.searchParams.delete('keyword');
+            url.searchParams.delete('set');
+            url.searchParams.delete('groupByProtocol');
+
+            filters.protocols.forEach(protocol => {
+                url.searchParams.append('protocol', protocol);
+            });
+
+            filters.values.forEach(value => {
+                url.searchParams.append('value', value);
+            });
+
+            filters.keywords.forEach(keyword => {
+                url.searchParams.append('keyword', keyword);
+            });
+
+            filters.sets.forEach(set => {
+                url.searchParams.append('set', set);
+            });
+
+            url.searchParams.set('groupByProtocol', filters.groupByProtocol);
+
+            window.history.replaceState({}, '', url);
+        }
+
 
     </script>
 </body>
