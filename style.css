@@ -71,6 +71,7 @@ body {
     padding: 10px;
     text-overflow: ellipsis;
     width: 100%;
+    font-size: 1.25em;
 }
 .card-section:not(:last-child) {
     border-bottom: 1px solid #e0e0e0;
@@ -123,9 +124,9 @@ body {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: 450px;
-    width: 325px;
-    min-width: 325px;
+    height: 550px;
+    width: 381px;
+    min-width: 381px;
 }
 
 .fixed-height-card .card-content {
