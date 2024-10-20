@@ -13,63 +13,78 @@ body {
 
 /* Background Colors for Each Protocol */
 .apathy {
-    background-color: #a8a8a8 !important;
+    background-color: hsl(0, 0%, 66%) !important;
+    --shadow-color: hsl(0, 0%, 46%);
 }
 
 .darkness {
-    background-color: #7c7b72 !important;
+    background-color: hsl(54, 4%, 47%) !important;
+    --shadow-color: hsl(54, 4%, 27%);
 }
 
 .death {
-    background-color: #484a53 !important;
+    background-color: hsl(229, 7%, 30%) !important;
+    --shadow-color: hsl(229, 7%, 10%);
 }
 
 .fire {
-    background-color: #dab188 !important;
+    background-color: hsl(30, 53%, 69%) !important;
+    --shadow-color: hsl(30, 53%, 49%);
 }
 
 .gravity {
-    background-color: #905c7a !important;
+    background-color: hsl(325, 22%, 46%) !important;
+    --shadow-color: hsl(325, 22%, 26%);
 }
 
 .hate {
-    background-color: #a84745 !important;
+    background-color: hsl(1, 42%, 46%) !important;
+    --shadow-color: hsl(1, 42%, 26%);
 }
 
 .life {
-    background-color: #abaa88 !important;
+    background-color: hsl(58, 17%, 60%) !important;
+    --shadow-color: hsl(58, 17%, 40%);
 }
 
 .light {
-    background-color: #baae9d !important;
+    background-color: hsl(35, 17%, 67%) !important;
+    --shadow-color: hsl(35, 17%, 47%);
 }
 
 .love {
-    background-color: #c17a83 !important;
+    background-color: hsl(352, 36%, 62%) !important;
+    --shadow-color: hsl(352, 36%, 42%);
 }
 
 .metal {
-    background-color: #7a716d !important;
+    background-color: hsl(18, 6%, 45%) !important;
+    --shadow-color: hsl(18, 6%, 25%);
 }
 
 .plague {
-    background-color: #698158 !important;
+    background-color: hsl(95, 19%, 43%) !important;
+    --shadow-color: hsl(95, 19%, 23%);
 }
 
 .psychic {
-    background-color: #796f86 !important;
+    background-color: hsl(266, 9%, 48%) !important;
+    --shadow-color: hsl(266, 9%, 28%);
 }
 
 .speed {
-    background-color: #909bac !important;
+    background-color: hsl(216, 14%, 62%) !important;
+    --shadow-color: hsl(216, 14%, 42%);
 }
 
 .spirit {
-    background-color: #446e75 !important;
+    background-color: hsl(189, 26%, 36%) !important;    
+    --shadow-color: hsl(189, 26%, 16%);
 }
 
 .water {
-    background-color: #a1afaf !important;
+    background-color: hsl(180, 8%, 66%) !important;
+    --shadow-color: hsl(180, 8%, 46%);
 }
 
 /* Card Sections */
@@ -143,6 +158,9 @@ body {
     height: 550px;
     width: 381px;
     min-width: 381px;
+    filter: drop-shadow(
+      4.01px 8.0px 8.0px var(--shadow-color)
+    );
 }
 
 .fixed-height-card .card-content {
@@ -200,7 +218,8 @@ body {
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.25em;
+    font-size: 1.5em;
+    padding: 3px;
 }
 
 .filter-options {
@@ -246,7 +265,8 @@ body {
     background-color: #ddd;
     border: 1px solid #484a53;
     border-radius: 5px;
-    padding: 5px;
+    padding: 5px;    
+    filter: drop-shadow(2px 2px);
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -328,10 +348,14 @@ body {
 
 .collapsible-body {
     margin-top: 5px;
-    background-color: rgba(47, 38, 51, 0.8);
+    background-color: hsla(282, 15%, 17%, 0.2);
+    --shadow-color: hsla(282, 15%, 7%);
     border: 2px solid #9154ab;
     border-bottom-color: #9154ab !important;
-    border-radius: 15px !important;
+    border-radius: 15px !important;    
+    filter: drop-shadow(
+      4.01px 8.0px 8.0px var(--shadow-color)
+    );
 }
 
 .container {
