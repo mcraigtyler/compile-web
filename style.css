@@ -15,45 +15,59 @@ body {
 .apathy {
     background-color: #a8a8a8 !important;
 }
+
 .darkness {
     background-color: #7c7b72 !important;
 }
-.death{
+
+.death {
     background-color: #484a53 !important;
 }
+
 .fire {
     background-color: #dab188 !important;
 }
+
 .gravity {
     background-color: #905c7a !important;
 }
+
 .hate {
     background-color: #a84745 !important;
 }
+
 .life {
     background-color: #abaa88 !important;
 }
+
 .light {
     background-color: #baae9d !important;
 }
+
 .love {
     background-color: #c17a83 !important;
 }
+
 .metal {
     background-color: #7a716d !important;
 }
+
 .plague {
     background-color: #698158 !important;
 }
+
 .psychic {
     background-color: #796f86 !important;
 }
+
 .speed {
     background-color: #909bac !important;
 }
+
 .spirit {
     background-color: #446e75 !important;
 }
+
 .water {
     background-color: #a1afaf !important;
 }
@@ -73,6 +87,7 @@ body {
     width: 100%;
     font-size: 1.25em;
 }
+
 .card-section:not(:last-child) {
     border-bottom: 1px solid #e0e0e0;
 }
@@ -84,6 +99,7 @@ body {
     display: flex;
     padding: 5px;
 }
+
 .custom-card-title .protocol {
     background-color: black;
     border-radius: 5px;
@@ -98,6 +114,7 @@ body {
     width: 135px;
     border: 2px solid white;
 }
+
 .custom-card-title .value {
     align-items: center;
     background-color: black;
@@ -136,8 +153,8 @@ body {
     padding: 0;
 }
 
-.blank-section{
-    background-color: rgba(255,255,255,0.5);    
+.blank-section {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .has-background {
@@ -156,6 +173,7 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     min-width: 900px !important;
+    margin-bottom: 20px !important;
 }
 
 .header img {
@@ -164,20 +182,94 @@ body {
     float: left;
 }
 
-#filter-form label{
+.modal-header {
+    background-color: #9154ab !important;
+    padding: 5px;
+    color: #ffffff;
+    font-size: 1.75em;
+    font-weight: bold;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.75em;
-    font-weight: bold;
 }
 
-.filter-options{
+#filter-form{
+    justify-content: center !important;
+}
+
+#filter-form label {
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.25em;
+}
+
+.filter-options {
     width: 100%;
     border: 1px solid #ffffff;
     border-radius: 15px;
 }
 
+.filter-group {
+    margin-bottom: 20px;
+    border: 1px solid #9154ab;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 350px;
+    float: left;
+}
+
+.filter-group>div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-group legend {
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0 5px;
+}
+
+#active-filters-count {
+    font-size: .5em !important;
+    top: 5px;
+    margin-left: 165px;
+    position: absolute;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    /* flex: 1 1 25%; */
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: #ddd;
+    border: 1px solid #484a53;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 10px;
+    padding: 3px;
+}
+
+.checkbox-wrapper label:hover {
+    cursor: pointer;
+    color: #9154ab;
+}
+
+/* Default label color */
+.checkbox-wrapper label {
+    color: #000;
+    transition: color 0.3s;
+}
+
+/* Change label color when checkbox is checked */
+.checkbox-wrapper input[type="checkbox"]:checked+label {
+    color: #9154ab;
+}
 
 /* Protocol Header */
 .protocol-header {
@@ -203,7 +295,7 @@ body {
     top: 225px;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     text-orientation: mixed;
     writing-mode: vertical-lr;
 }
@@ -211,7 +303,7 @@ body {
 
 /* Overrides */
 
-.badge{
+.badge {
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
@@ -219,22 +311,22 @@ body {
     font-size: 1.25em !important;
 }
 
-.btn{
+.btn {
     background-color: #152130 !important;
 }
 
-.card{
+.card {
     border-radius: 15px !important;
     border: 2px solid #ffffff !important;
 }
 
-.collapsible-header{    
+.collapsible-header {
     border: 2px solid #ffffff;
     border-bottom-color: #ffffff !important;
     border-radius: 15px !important;
 }
 
-.collapsible-body{
+.collapsible-body {
     margin-top: 5px;
     background-color: rgba(47, 38, 51, 0.8);
     border: 2px solid #9154ab;
@@ -242,33 +334,54 @@ body {
     border-radius: 15px !important;
 }
 
-.container{
+.container {
     width: 90% !important;
     max-width: none !important;
 }
 
 .input-field {
- max-width: 90% !important;
- margin-left: 25px !important;
- margin-top: 10px !important;
+    max-width: 90% !important;
+    margin-left: 25px !important;
+    margin-top: 10px !important;
 }
 
-.modal{
-    width: 80% !important;
+.modal {
+    width: 650px !important;
+
+    .modal-fixed-header {
+        padding: 0;
+        height: 70%;
+
+        .modal-header {
+            position: absolute;
+            top: 0;
+        }
+
+        .modal-header {
+            border-radius: 0 0 2px 2px;
+            padding: 4px 6px;
+            height: 56px;
+            width: 100%;
+        }
+    }
 }
 
-.row{
-    display: flex !important;    
+.modal-content {
+    height: calc(100% - 75px) !important;
+}
+
+.row {
+    display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     align-items: center !important;
 }
 
-.select-wrapper{
+.select-wrapper {
     margin-bottom: 20px !important;
 }
 
-.select-dropdown{
+.select-dropdown {
     padding-top: 15px !important;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
