@@ -107,6 +107,7 @@
         let protocols;
         let groupProtocolDataToggle = true; // default to grouping the data by protocol
         let generatePng = false; // if true, the page will deliver a single png of the requested card
+        let generateCardName = ''; // if generating a single card, this will be the card name
 
         $(document).ready(function () {
             $.getJSON('cards.json', function (response) {
@@ -370,13 +371,14 @@
             if (generatePng) {
                 // Delay to ensure all elements are rendered
                 setTimeout(function () {
-                    captureAndDownloadPNG();
+                    captureAndDownloadPNG(generateCardName);
                 }, 500); 
             }
         }
 
-        function captureAndDownloadPNG() {
-            const targetElement = document.getElementById('card-content');
+        function captureAndDownloadPNG(card) {
+            console.log('Generating PNG for card:', card);
+            const targetElement = document.getElementById('card-' + card.toLowerCase());
 
             html2canvas(targetElement, { scale: 2 }).then(canvas => {
                 canvas.toBlob(function (blob) {
@@ -428,7 +430,7 @@
         function createCard(item) {
             let colDiv = $('<div>').addClass('col');
             let protocolClass = sanitizeProtocolName(item.protocol.toLowerCase());
-            let cardDiv = $('<div>').addClass('card fixed-height-card ' + protocolClass);
+            let cardDiv = $('<div>').addClass('card fixed-height-card ' + protocolClass).attr('id', 'card-' + item.protocol.toLowerCase() + '-' + item.value);
             let cardContentDiv = $('<div>').addClass('card-content');
             let cardTitle = $('<div>').addClass('custom-card-title');
             let protocolDiv = $('<div>').addClass('protocol').text(item.protocol);
@@ -580,6 +582,7 @@
             if (params.img === 'true' && params.protocols.length === 1 && params.values.length === 1) {
                 generatePng = true;
                 groupByProtocolFlag = false; // force ungrouped data
+                generateCardName = params.protocols[0] + '-' + params.values[0];
             }  
 
             return {
@@ -603,6 +606,7 @@
                 if (filters.protocols.length === 1 && filters.values.length === 1 && filters.img === 'true') {
                     generatePng = true;
                     groupProtocolDataToggle = false;
+                    generateCardName = params.protocols[0] + '-' + params.values[0];
                 }
                 applyFiltersFromState(filters);
             } catch (error) {
