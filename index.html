@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 </head>
 
 <body>
@@ -104,6 +106,7 @@
         let data;
         let protocols;
         let groupProtocolDataToggle = true; // default to grouping the data by protocol
+        let generatePng = false; // if true, the page will deliver a single png of the requested card
 
         $(document).ready(function () {
             $.getJSON('cards.json', function (response) {
@@ -140,7 +143,8 @@
 
                 setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
 
-                const compressedState = getCompressedStateFromURL();
+                const compressedState = getCompressedStateFromURL();                
+
                 if (compressedState) {
                     applyStateFromCompressedString(compressedState);
                 } else {
@@ -224,25 +228,22 @@
         }
 
         function applyFilters() {
+            console.log('applying filters');
             let selectedProtocols = $('#protocol-filter input[name="protocol"]:checked').map(function () {
                 return $(this).val();
             }).get();
-            console.log('Selected Protocols:', selectedProtocols);
 
             let selectedValues = $('#value-filter input[name="value"]:checked').map(function () {
                 return $(this).val();
             }).get();
-            console.log('Selected Values:', selectedValues);
 
             let selectedKeywords = $('#keyword-filter input[name="keyword"]:checked').map(function () {
                 return $(this).val();
             }).get();
-            console.log('Selected Keywords:', selectedKeywords);
 
             let selectedSets = $('#sets-filter input[name="set"]:checked').map(function () {
                 return $(this).val();
             }).get();
-            console.log('Selected Sets:', selectedSets);
 
             const filters = {
                 protocols: selectedProtocols,
@@ -365,7 +366,34 @@
                     contentUL.append(protocolList);
                 });
             }
+
+            if (generatePng) {
+                // Delay to ensure all elements are rendered
+                setTimeout(function () {
+                    captureAndDownloadPNG();
+                }, 500); 
+            }
         }
+
+        function captureAndDownloadPNG() {
+            const targetElement = document.getElementById('card-content');
+
+            html2canvas(targetElement, { scale: 2 }).then(canvas => {
+                canvas.toBlob(function (blob) {
+                    const link = document.createElement('a');
+                    link.download = 'card_capture.png';
+                    link.href = URL.createObjectURL(blob);
+                    document.body.appendChild(link);
+                    link.click();
+
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+                }, 'image/png');
+            }).catch(err => {
+                console.error("Error capturing the DIV:", err);
+            });
+        }
+
 
         function groupByProtocol(data) {
             let grouped = {};
@@ -518,12 +546,13 @@
         function getQueryParams() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-
+            
             const protocols = urlParams.getAll('protocol');
             const values = urlParams.getAll('value');
             const keywords = urlParams.getAll('keyword');
             const sets = urlParams.getAll('set');
             const groupByProtocol = urlParams.get('groupByProtocol');
+            const img = urlParams.get('img');
 
             const hasFilters =
                 protocols.length > 0 ||
@@ -538,12 +567,21 @@
                 keywords,
                 sets,
                 groupByProtocol,
+                img,
                 hasFilters
             };
         }
 
         function constructFiltersFromQueryParams(params) {
-            const groupByProtocolFlag = params.groupByProtocol !== null ? params.groupByProtocol === 'true' : true;
+            console.log('constructing filters from query params:', params);
+            let groupByProtocolFlag = params.groupByProtocol !== null ? params.groupByProtocol === 'true' : true;
+            
+            // Check if img=true and only one protocol and value are provided
+            if (params.img === 'true' && params.protocols.length === 1 && params.values.length === 1) {
+                generatePng = true;
+                groupByProtocolFlag = false; // force ungrouped data
+            }  
+
             return {
                 protocols: params.protocols || [],
                 values: params.values || [],
@@ -561,9 +599,15 @@
             try {
                 const decompressedStr = decompressString(compressedState);
                 const filters = JSON.parse(decompressedStr);
+                // Check to see if we're generating an image
+                if (filters.protocols.length === 1 && filters.values.length === 1 && filters.img === 'true') {
+                    generatePng = true;
+                    groupProtocolDataToggle = false;
+                }
                 applyFiltersFromState(filters);
             } catch (error) {
                 console.error('Failed to apply state from URL:', error);
+                generatePng = false;
                 const url = new URL(window.location.href); // remove invalid state from URL and display all data
                 url.searchParams.delete('state');
                 window.history.replaceState({}, '', url);
@@ -572,11 +616,28 @@
         }
 
         function applyFiltersFromState(filters) {
-            $('#protocol-filter').val(filters.protocols);
-            $('#value-filter').val(filters.values);
-            $('#keyword-filter').val(filters.keywords);
-            $('#sets-filter').val(filters.sets);
-            $('select').formSelect();
+            console.log('applying filters from state:', filters);
+            
+            $('#protocol-filter input[type="checkbox"]').prop('checked', false);
+            $('#value-filter input[type="checkbox"]').prop('checked', false);
+            $('#keyword-filter input[type="checkbox"]').prop('checked', false);
+            $('#sets-filter input[type="checkbox"]').prop('checked', false);
+
+            filters.protocols.forEach(function(protocol) {
+                $('#protocol-filter input[name="protocol"][value="' + protocol + '"]').prop('checked', true);
+            });
+
+            filters.values.forEach(function(value) {
+                $('#value-filter input[name="value"][value="' + value + '"]').prop('checked', true);
+            });
+
+            filters.keywords.forEach(function(keyword) {
+                $('#keyword-filter input[name="keyword"][value="' + keyword + '"]').prop('checked', true);
+            });
+
+            filters.sets.forEach(function(set) {
+                $('#sets-filter input[name="set"][value="' + set + '"]').prop('checked', true);
+            });
 
             groupProtocolDataToggle = filters.groupByProtocol;
 
