@@ -49,6 +49,13 @@ The values that may be passed for each parameter must match an associated value 
 
 **Example** This URL [https://chuckplayer.github.io/compile/?protocol=foobar&protocol=apathy](https://chuckplayer.github.io/compile/?protocol=foobar&protocol=apathy) will only display cards found in the Apathy protocol. The value "foobar" will be ignored.
 
+### Exporting a Card
+
+The UI will export a PNG of a single card if the query string has an img=true query parameter.
+
+**Example** This URL [https://chuckplayer.github.io/compile/?img=true&protocol=death&value=5](https://chuckplayer.github.io/compile/?img=true&protocol=death&value=5) will display the Death protocol card with a value of 5 and trigger a download of a PNG image of that card.
+Only a single card/value may be downloaded.
+
 ## Example Card 
 
 This is an example of one card that can be found in cards.json.
