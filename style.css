@@ -311,13 +311,10 @@ body {
 .set-text {
     position: absolute;
     right: 10px;
-    top: 255px;
+    bottom: 5px;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    text-orientation: mixed;
-    writing-mode: tb-rl;
-    transform: rotate(-180deg);
     color: #ffffff;
 }
 
