@@ -302,8 +302,17 @@
         }
 
         function clearFilters() {
+            clearImgFlag();
+            generatePng = false;
             $('#filter-form input[type="checkbox"]').prop('checked', false).trigger('change');
             applyFilters();
+        }
+
+        function clearImgFlag() {
+            const url = new URL(window.location.href);            
+            url.searchParams.delete('img'); //delete img flag from URL
+            window.history.replaceState({}, '', url);
+            generatePng = false;
         }
 
         function updateActiveFiltersCount() {
@@ -391,6 +400,7 @@
                     document.body.removeChild(link);
                     URL.revokeObjectURL(link.href);
                 }, 'image/png');
+                clearImgFlag();            
             }).catch(err => {
                 console.error("Error capturing the DIV:", err);
             });
@@ -493,6 +503,7 @@
             url.searchParams.delete('keyword');
             url.searchParams.delete('set');
             url.searchParams.delete('groupByProtocol');
+            url.searchParams.delete('img');
 
             filters.protocols.forEach(protocol => {
                 url.searchParams.append('protocol', protocol);
@@ -582,7 +593,9 @@
                 generatePng = true;
                 groupByProtocolFlag = false; // force ungrouped data
                 generateCardName = params.protocols[0] + '-' + params.values[0];
-            }  
+            } else {
+                generatePng = false;
+            }
 
             return {
                 protocols: params.protocols || [],
@@ -606,6 +619,8 @@
                     generatePng = true;
                     groupProtocolDataToggle = false;
                     generateCardName = params.protocols[0] + '-' + params.values[0];
+                } else {
+                    generatePng = false;
                 }
                 applyFiltersFromState(filters);
             } catch (error) {
