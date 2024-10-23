@@ -33,7 +33,8 @@
             "text": ""
         },
         "keywords": {
-            "flip": true
+            "flip": true,
+            "line": true
         },
         "set": "AX01"
     },
@@ -53,7 +54,9 @@
             "text": "First, flip this card."
         },
         "keywords": {
-            "flip": true
+            "flip": true,
+            "covered": true,
+            "line": true
         },
         "set": "AX01"
     },
@@ -93,7 +96,8 @@
             "text": ""
         },
         "keywords": {
-            "flip": true
+            "flip": true,
+            "covered": true
         },
         "set": "AX01"
     },
@@ -134,7 +138,8 @@
         },
         "keywords": {
             "draw": true,
-            "shift": true
+            "shift": true,
+            "covered": true
         },
         "set": "MN01"
     },
@@ -175,7 +180,10 @@
             "text": ""
         },
         "keywords": {
-            "flip": true
+            "flip": true,
+            "covered": true,
+            "line": true,
+            "stack": true
         },
         "set": "MN01"
     },
@@ -195,7 +203,8 @@
             "text": ""
         },
         "keywords": {
-            "play": true
+            "play": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -255,7 +264,8 @@
             "text": ""
         },
         "keywords": {
-            "delete": true
+            "delete": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -296,7 +306,8 @@
             "text": ""
         },
         "keywords": {
-            "delete": true
+            "delete": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -377,7 +388,8 @@
         },
         "keywords": {
             "draw": true,
-            "flip": true
+            "flip": true,
+            "covered": true
         },
         "set": "MN01"
     },
@@ -501,7 +513,8 @@
             "text": ""
         },
         "keywords": {
-            "play": true
+            "play": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -522,7 +535,8 @@
         },
         "keywords": {
             "draw": true,
-            "shift": true
+            "shift": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -543,7 +557,8 @@
         },
         "keywords": {
             "flip": true,
-            "shift": true
+            "shift": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -563,7 +578,8 @@
             "text": ""
         },
         "keywords": {
-            "shift": true
+            "shift": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -603,7 +619,8 @@
             "text": ""
         },
         "keywords": {
-            "play": true
+            "play": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -704,7 +721,9 @@
             "text": "First, delete the lowest value covered card in this line."
         },
         "keywords": {
-            "delete": true
+            "delete": true,
+            "covered": true,
+            "line": true
         },
         "set": "AX01"
     },
@@ -745,7 +764,9 @@
         },
         "keywords": {
             "delete": true,
-            "play": true
+            "play": true,
+            "covered": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -806,7 +827,9 @@
             "text": "First, play the top card of your deck face-down in another line."
         },
         "keywords": {
-            "play": true
+            "play": true,
+            "covered": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -930,7 +953,8 @@
             "text": ""
         },
         "keywords": {
-            "shift": true
+            "shift": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -1114,7 +1138,8 @@
             "text": ""
         },
         "keywords": {
-            "flip": true
+            "flip": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -1134,7 +1159,8 @@
             "text": ""
         },
         "keywords": {
-            "draw": true
+            "draw": true,
+            "compile": true
         },
         "set": "MN01"
     },
@@ -1153,7 +1179,9 @@
             "emphasis": "",
             "text": ""
         },
-        "keywords": {},
+        "keywords": {
+            "line": true
+        },
         "set": "MN01"
     },
     {
@@ -1173,7 +1201,8 @@
         },
         "keywords": {
             "delete": true,
-            "draw": true
+            "draw": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -1213,7 +1242,9 @@
             "text": ""
         },
         "keywords": {
-            "delete": true
+            "delete": true,
+            "flip": true,
+            "covered": true
         },
         "set": "MN01"
     },
@@ -1233,7 +1264,8 @@
             "text": "Your opponent cannot play cards in this line."
         },
         "keywords": {
-            "discard": true
+            "discard": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -1500,7 +1532,8 @@
             "text": ""
         },
         "keywords": {
-            "draw": true
+            "draw": true,
+            "cache": true
         },
         "set": "MN01"
     },
@@ -1520,7 +1553,9 @@
             "text": ""
         },
         "keywords": {
-            "shift": true
+            "shift": true,
+            "covered": true,
+            "delete": true
         },
         "set": "MN01"
     },
@@ -1602,7 +1637,8 @@
         },
         "keywords": {
             "draw": true,
-            "refresh": true
+            "refresh": true,
+            "cache": true
         },
         "set": "MN01"
     },
@@ -1664,7 +1700,8 @@
             "text": ""
         },
         "keywords": {
-            "shift": true
+            "shift": true,
+            "covered": true
         },
         "set": "MN01"
     },
@@ -1744,7 +1781,8 @@
             "text": ""
         },
         "keywords": {
-            "play": true
+            "play": true,
+            "line": true
         },
         "set": "MN01"
     },
@@ -1785,7 +1823,8 @@
             "text": ""
         },
         "keywords": {
-            "return": true
+            "return": true,
+            "line": true
         },
         "set": "MN01"
     },
