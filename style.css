@@ -298,6 +298,12 @@ body {
     text-transform: uppercase;
     margin-top: 3px;
 }
+.protocol-header-bottom{
+    font-size: .5em;
+    margin-top: 35px;
+    position: absolute;
+    left: 30;
+}
 
 /* Section Wrapper */
 .section-wrapper {

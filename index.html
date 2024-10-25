@@ -104,27 +104,29 @@
         let uniqueKeywords = new Set();
         let uniqueSets = new Set();
         let data;
-        let protocols;
+        let protocols = {};
         let groupProtocolDataToggle = true; // default to grouping the data by protocol
         let generatePng = false; // if true, the page will deliver a single png of the requested card
         let generateCardName = ''; // if generating a single card, this will be the card name
 
         $(document).ready(function () {
-            $.getJSON('cards.json', function (response) {
-                console.log("Card data loaded successfully");
+            // Create promises for both AJAX calls
+            let cardsPromise = $.getJSON('cards.json');
+            let protocolsPromise = $.getJSON('protocols.json');
+            $.when(cardsPromise, protocolsPromise).done(function (cardsResponse, protocolsResponse) {
+                console.log("Data loaded successfully");
                 // make sure the filter lists are cleared out before adding new data. 
                 uniqueProtocols.clear();
                 uniqueValues.clear();
                 uniqueKeywords.clear();
                 uniqueSets.clear();
-                // if we loaded the card data, get the protocol data for display when grouped
-                $.getJSON('protocols.json', function (response) {
-                    console.log("Protocol data loaded successfully");
-                    protocols = response;
-                }).fail(function (jqxhr, textStatus, error) {
-                    console.error("Failed to load protocol data: " + textStatus + ", " + error);
-                });;
-                data = response;
+                
+                // Transform the protocols array into an object for easy lookup
+                protocolsResponse[0].forEach(function (item) {
+                    let key = item.protocol.trim().toLowerCase();
+                    protocols[key] = item;
+                });
+                data = cardsResponse[0];
 
                 data.forEach(function (item) {
                     uniqueProtocols.add(item.protocol.trim().toLowerCase());
@@ -359,7 +361,18 @@
                 $.each(groupedData, function (protocol, items) {
                     let protocolList = $('<li>');
                     let protocolClass = sanitizeProtocolName(protocol.toLowerCase());
-                    let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass).text(protocol);
+                    let protocolInfo = protocols[protocol.trim().toLowerCase()];
+                    console.log('protocolInfo:', protocolInfo);
+                    let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass);
+                    let protocolHeaderText = '<div class="protocol-header-top">' + protocol;
+                    if(protocolInfo && protocolInfo.top) {
+                        protocolHeaderText += ' - ' + protocolInfo.top;
+                    }
+                    protocolHeaderText += "</div>";
+                    if(protocolInfo && protocolInfo.bottom) {
+                        protocolHeaderText += '<div class="protocol-header-bottom">' + protocolInfo.bottom + '</div>';
+                    }
+                    protocolHeader.append(protocolHeaderText);
                     protocolHeader.append($('<span>').addClass('badge').text(items.length));
                     protocolList.append(protocolHeader);
 
