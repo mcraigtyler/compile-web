@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 </head>
 
 <body>
@@ -24,51 +26,57 @@
                 <span>Card Database</span>
                 <ul class="right">
                     <li><a data-target="filters" class="modal-trigger"><i
-                                class="material-icons left">filter_alt</i>Filter Cards</a></li>
+                                class="material-icons left">filter_alt</i>Filter Cards</a>
+                        <span id="active-filters-count" class="badge"></span>
+                    </li>
                     <li><a id="clear-filters"><i class="material-icons left">refresh</i>Clear Filters</a></li>
                 </ul>
             </div>
         </nav>
     </div>
 
-    <div id="filters" class="modal filter-options modal-fixed-footer">
-        <div class="model-content">
+    <div id="filters" class="modal filter-options modal-fixed-footer modal-fixed-header">
+        <div class="modal-header">
+            Filters
+        </div>
+        <div class="modal-content">
             <form id="filter-form">
-                <div class="header">
-                    Filters
-                </div>
-                <div class="input-field">
-                    <select id="protocol-filter" multiple>
-                        <option value="" disabled selected>Select Protocol</option>
-                    </select>
-                    <label>Protocol</label>
-                </div>
-                <div class="input-field">
-                    <select id="value-filter" multiple>
-                        <option value="" disabled selected>Select Value</option>
-                    </select>
-                    <label>Value</label>
-                </div>
 
-                <div class="input-field">
-                    <select id="keyword-filter" multiple>
-                        <option value="" disabled selected>Select Keyword</option>
-                    </select>
-                    <label>Keyword</label>
-                </div>
+                <fieldset class="filter-group">
+                    <legend>Set</legend>
+                    <div id="sets-filter">
+                        <!-- Checkboxes will be dynamically inserted here -->
+                    </div>
+                </fieldset>
 
-                <div class="input-field">
-                    <select id="sets-filter" multiple>
-                        <option value="" disabled selected>Select Set</option>
-                    </select>
-                    <label>Set</label>
-                </div>
+                <fieldset class="filter-group">
+                    <legend>Value</legend>
+                    <div id="value-filter">
+                        <!-- Checkboxes will be dynamically inserted here -->
+                    </div>
+                </fieldset>
+
+                <fieldset class="filter-group">
+                    <legend>Protocol</legend>
+                    <div id="protocol-filter">
+                        <!-- Checkboxes will be dynamically inserted here -->
+                    </div>
+                </fieldset>
+
+                <fieldset class="filter-group">
+                    <legend>Keyword</legend>
+                    <div id="keyword-filter">
+                        <!-- Checkboxes will be dynamically inserted here -->
+                    </div>
+                </fieldset>
+
             </form>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close btn">Close</a>
         </div>
     </div>
+
 
     <div class="container">
         <ul id="protocolList" class="collapsible popout"></ul>
@@ -96,18 +104,29 @@
         let uniqueKeywords = new Set();
         let uniqueSets = new Set();
         let data;
+        let protocols = {};
         let groupProtocolDataToggle = true; // default to grouping the data by protocol
+        let generatePng = false; // if true, the page will deliver a single png of the requested card
+        let generateCardName = ''; // if generating a single card, this will be the card name
 
         $(document).ready(function () {
-            $.getJSON('cards.json', function (response) {
+            // Create promises for both AJAX calls
+            let cardsPromise = $.getJSON('cards.json');
+            let protocolsPromise = $.getJSON('protocols.json');
+            $.when(cardsPromise, protocolsPromise).done(function (cardsResponse, protocolsResponse) {
                 console.log("Data loaded successfully");
                 // make sure the filter lists are cleared out before adding new data. 
                 uniqueProtocols.clear();
                 uniqueValues.clear();
                 uniqueKeywords.clear();
                 uniqueSets.clear();
-
-                data = response;
+                
+                // Transform the protocols array into an object for easy lookup
+                protocolsResponse[0].forEach(function (item) {
+                    let key = item.protocol.trim().toLowerCase();
+                    protocols[key] = item;
+                });
+                data = cardsResponse[0];
 
                 data.forEach(function (item) {
                     uniqueProtocols.add(item.protocol.trim().toLowerCase());
@@ -127,7 +146,8 @@
 
                 setupFilters(protocolsArray, valuesArray, keywordsArray, setsArray);
 
-                const compressedState = getCompressedStateFromURL();
+                const compressedState = getCompressedStateFromURL();                
+
                 if (compressedState) {
                     applyStateFromCompressedString(compressedState);
                 } else {
@@ -168,50 +188,65 @@
             return tooltipTexts[toolTipType] || '';
         }
 
+        function createCheckbox(name, value, labelText) {
+            let checkboxId = `${name}-${value}`.replace(/\s+/g, '-').toLowerCase();
+            let checkbox = $(`
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="${checkboxId}" name="${name}" value="${value}">
+                    <label for="${checkboxId}">${labelText}</label>
+                </div>
+            `);
+            return checkbox;
+        }
+
         function setupFilters(protocols, values, keywords, sets) {
-            let protocolFilter = $('#protocol-filter');
+
+            let protocolContainer = $('#protocol-filter');
             protocols.sort().forEach(function (protocol) {
-                let option = $('<option>').attr('value', protocol).text(protocol);
-                protocolFilter.append(option);
+                let checkbox = createCheckbox('protocol', protocol, protocol);
+                protocolContainer.append(checkbox);
             });
 
-            let valueFilter = $('#value-filter');
+            let valueContainer = $('#value-filter');
             values.sort((a, b) => a - b).forEach(function (value) {
-                let option = $('<option>').attr('value', value).text(value);
-                valueFilter.append(option);
+                let checkbox = createCheckbox('value', value, value);
+                valueContainer.append(checkbox);
             });
 
-            let keywordFilter = $('#keyword-filter');
+            let keywordContainer = $('#keyword-filter');
             keywords.sort().forEach(function (keyword) {
-                let option = $('<option>').attr('value', keyword).text(keyword);
-                keywordFilter.append(option);
+                let checkbox = createCheckbox('keyword', keyword, keyword);
+                keywordContainer.append(checkbox);
             });
 
-            let setsFilter = $('#sets-filter');
+            let setsContainer = $('#sets-filter');
             sets.sort().forEach(function (set) {
-                let option = $('<option>').attr('value', set).text(set);
-                setsFilter.append(option);
+                let checkbox = createCheckbox('set', set, set);
+                setsContainer.append(checkbox);
             });
 
-            $('select').formSelect();
-
-            $('#filter-form').on('change', function () {
+            $('#filter-form').on('change', 'input[type="checkbox"]', function () {
                 applyFilters();
             });
         }
 
         function applyFilters() {
-            let selectedProtocols = $('#protocol-filter').val();
-            let selectedValues = $('#value-filter').val();
-            let selectedKeywords = $('#keyword-filter').val();
-            let selectedSets = $('#sets-filter').val();
+            console.log('applying filters');
+            let selectedProtocols = $('#protocol-filter input[name="protocol"]:checked').map(function () {
+                return $(this).val();
+            }).get();
 
-            const isDefaultState =
-                selectedProtocols.length === 0 &&
-                selectedValues.length === 0 &&
-                selectedKeywords.length === 0 &&
-                selectedSets.length === 0 &&
-                groupProtocolDataToggle === true; // default state
+            let selectedValues = $('#value-filter input[name="value"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+
+            let selectedKeywords = $('#keyword-filter input[name="keyword"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+
+            let selectedSets = $('#sets-filter input[name="set"]:checked').map(function () {
+                return $(this).val();
+            }).get();
 
             const filters = {
                 protocols: selectedProtocols,
@@ -221,38 +256,43 @@
                 groupByProtocol: groupProtocolDataToggle,
             };
 
-            const serializedFilters = serializeFilters(filters);
-            const compressedState = compressString(serializedFilters);
+            const isDefaultState =
+                selectedProtocols.length === 0 &&
+                selectedValues.length === 0 &&
+                selectedKeywords.length === 0 &&
+                selectedSets.length === 0 &&
+                groupProtocolDataToggle === true; // Assuming true is the default value
 
             if (isDefaultState) {
+                // No filters applied, remove 'state' parameter from URL
                 updateURLWithCompressedState(null);
             } else {
                 const serializedFilters = serializeFilters(filters);
                 const compressedState = compressString(serializedFilters);
                 updateURLWithCompressedState(compressedState);
             }
-            
+
             let filteredData = data.filter(function (item) {
                 let matchesProtocol = true;
                 let matchesValue = true;
                 let matchesKeyword = true;
                 let matchesSet = true;
 
-                if (selectedProtocols && selectedProtocols.length > 0) {
+                if (selectedProtocols.length > 0) {
                     matchesProtocol = selectedProtocols.includes(item.protocol.toLowerCase());
                 }
 
-                if (selectedValues && selectedValues.length > 0) {
+                if (selectedValues.length > 0) {
                     matchesValue = selectedValues.includes(item.value.toString());
                 }
 
-                if (selectedKeywords && selectedKeywords.length > 0) {
+                if (selectedKeywords.length > 0) {
                     matchesKeyword = selectedKeywords.some(function (kw) {
                         return item.keywords && item.keywords[kw];
                     });
                 }
 
-                if (selectedSets && selectedSets.length > 0) {
+                if (selectedSets.length > 0) {
                     matchesSet = selectedSets.includes(item.set.toLowerCase());
                 }
 
@@ -260,18 +300,32 @@
             });
 
             displayData(filteredData);
+            updateActiveFiltersCount();
         }
 
         function clearFilters() {
-            $('#protocol-filter').val(null);
-            $('#value-filter').val(null);
-            $('#keyword-filter').val(null);
-            $('#sets-filter').val(null);
-            $('select').formSelect();
-            
-            groupProtocolDataToggle = true;
-
+            clearImgFlag();
+            generatePng = false;
+            $('#filter-form input[type="checkbox"]').prop('checked', false).trigger('change');
             applyFilters();
+        }
+
+        function clearImgFlag() {
+            const url = new URL(window.location.href);            
+            url.searchParams.delete('img'); //delete img flag from URL
+            window.history.replaceState({}, '', url);
+            generatePng = false;
+        }
+
+        function updateActiveFiltersCount() {
+            let count = 0;
+
+            count += $('#protocol-filter input[name="protocol"]:checked').length;
+            count += $('#value-filter input[name="value"]:checked').length;
+            count += $('#keyword-filter input[name="keyword"]:checked').length;
+            count += $('#sets-filter input[name="set"]:checked').length;
+
+            $('#active-filters-count').text(count === 0 ? '' : count);
         }
 
         function toggleGroupByProtocol(group) {
@@ -307,7 +361,18 @@
                 $.each(groupedData, function (protocol, items) {
                     let protocolList = $('<li>');
                     let protocolClass = sanitizeProtocolName(protocol.toLowerCase());
-                    let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass).text(protocol);
+                    let protocolInfo = protocols[protocol.trim().toLowerCase()];
+                    console.log('protocolInfo:', protocolInfo);
+                    let protocolHeader = $('<div>').addClass('protocol-header collapsible-header ' + protocolClass);
+                    let protocolHeaderText = '<div class="protocol-header-top">' + protocol;
+                    if(protocolInfo && protocolInfo.top) {
+                        protocolHeaderText += ' - ' + protocolInfo.top;
+                    }
+                    protocolHeaderText += "</div>";
+                    if(protocolInfo && protocolInfo.bottom) {
+                        protocolHeaderText += '<div class="protocol-header-bottom">' + protocolInfo.bottom + '</div>';
+                    }
+                    protocolHeader.append(protocolHeaderText);
                     protocolHeader.append($('<span>').addClass('badge').text(items.length));
                     protocolList.append(protocolHeader);
 
@@ -324,6 +389,34 @@
                     contentUL.append(protocolList);
                 });
             }
+
+            if (generatePng) {
+                // Delay to ensure all elements are rendered
+                setTimeout(function () {
+                    captureAndDownloadPNG(generateCardName);
+                }, 500); 
+            }
+        }
+
+        function captureAndDownloadPNG(card) {
+            console.log('Generating PNG for card:', card);
+            const targetElement = document.getElementById('card-' + card.toLowerCase());
+
+            html2canvas(targetElement, { scale: 2 }).then(canvas => {
+                canvas.toBlob(function (blob) {
+                    const link = document.createElement('a');
+                    link.download = card + '.png';
+                    link.href = URL.createObjectURL(blob);
+                    document.body.appendChild(link);
+                    link.click();
+
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+                }, 'image/png');
+                clearImgFlag();            
+            }).catch(err => {
+                console.error("Error capturing the DIV:", err);
+            });
         }
 
         function groupByProtocol(data) {
@@ -359,7 +452,7 @@
         function createCard(item) {
             let colDiv = $('<div>').addClass('col');
             let protocolClass = sanitizeProtocolName(item.protocol.toLowerCase());
-            let cardDiv = $('<div>').addClass('card fixed-height-card ' + protocolClass);
+            let cardDiv = $('<div>').addClass('card fixed-height-card ' + protocolClass).attr('id', 'card-' + item.protocol.toLowerCase() + '-' + item.value);
             let cardContentDiv = $('<div>').addClass('card-content');
             let cardTitle = $('<div>').addClass('custom-card-title');
             let protocolDiv = $('<div>').addClass('protocol').text(item.protocol);
@@ -423,6 +516,7 @@
             url.searchParams.delete('keyword');
             url.searchParams.delete('set');
             url.searchParams.delete('groupByProtocol');
+            url.searchParams.delete('img');
 
             filters.protocols.forEach(protocol => {
                 url.searchParams.append('protocol', protocol);
@@ -454,12 +548,12 @@
         }
 
         function updateURLWithCompressedState(compressedState) {
-            const url = new URL(window.location.href); 
+            const url = new URL(window.location.href);
             url.searchParams.delete('protocol');
             url.searchParams.delete('value');
             url.searchParams.delete('keyword');
             url.searchParams.delete('set');
-            url.searchParams.delete('groupByProtocol');           
+            url.searchParams.delete('groupByProtocol');
             url.searchParams.delete('state');
             if (compressedState) {
                 url.searchParams.set('state', compressedState);
@@ -477,12 +571,13 @@
         function getQueryParams() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-
+            
             const protocols = urlParams.getAll('protocol');
             const values = urlParams.getAll('value');
             const keywords = urlParams.getAll('keyword');
             const sets = urlParams.getAll('set');
             const groupByProtocol = urlParams.get('groupByProtocol');
+            const img = urlParams.get('img');
 
             const hasFilters =
                 protocols.length > 0 ||
@@ -497,12 +592,24 @@
                 keywords,
                 sets,
                 groupByProtocol,
+                img,
                 hasFilters
             };
         }
 
         function constructFiltersFromQueryParams(params) {
-            const groupByProtocolFlag = params.groupByProtocol !== null ? params.groupByProtocol === 'true' : true; 
+            console.log('constructing filters from query params:', params);
+            let groupByProtocolFlag = params.groupByProtocol !== null ? params.groupByProtocol === 'true' : true;
+            
+            // Check if img=true and only one protocol and value are provided
+            if (params.img === 'true' && params.protocols.length === 1 && params.values.length === 1) {
+                generatePng = true;
+                groupByProtocolFlag = false; // force ungrouped data
+                generateCardName = params.protocols[0] + '-' + params.values[0];
+            } else {
+                generatePng = false;
+            }
+
             return {
                 protocols: params.protocols || [],
                 values: params.values || [],
@@ -520,22 +627,48 @@
             try {
                 const decompressedStr = decompressString(compressedState);
                 const filters = JSON.parse(decompressedStr);
+                // Check to see if we're generating an image
+                if (filters.protocols.length === 1 && filters.values.length === 1 && filters.img === 'true') {
+                    generatePng = true;
+                    groupProtocolDataToggle = false;
+                    generateCardName = params.protocols[0] + '-' + params.values[0];
+                } else {
+                    generatePng = false;
+                }
                 applyFiltersFromState(filters);
             } catch (error) {
                 console.error('Failed to apply state from URL:', error);
+                generatePng = false;
                 const url = new URL(window.location.href); // remove invalid state from URL and display all data
                 url.searchParams.delete('state');
-                window.history.replaceState({}, '', url);                
+                window.history.replaceState({}, '', url);
                 displayData(data);
             }
         }
 
         function applyFiltersFromState(filters) {
-            $('#protocol-filter').val(filters.protocols);
-            $('#value-filter').val(filters.values);
-            $('#keyword-filter').val(filters.keywords);
-            $('#sets-filter').val(filters.sets);
-            $('select').formSelect();
+            console.log('applying filters from state:', filters);
+            
+            $('#protocol-filter input[type="checkbox"]').prop('checked', false);
+            $('#value-filter input[type="checkbox"]').prop('checked', false);
+            $('#keyword-filter input[type="checkbox"]').prop('checked', false);
+            $('#sets-filter input[type="checkbox"]').prop('checked', false);
+
+            filters.protocols.forEach(function(protocol) {
+                $('#protocol-filter input[name="protocol"][value="' + protocol + '"]').prop('checked', true);
+            });
+
+            filters.values.forEach(function(value) {
+                $('#value-filter input[name="value"][value="' + value + '"]').prop('checked', true);
+            });
+
+            filters.keywords.forEach(function(keyword) {
+                $('#keyword-filter input[name="keyword"][value="' + keyword + '"]').prop('checked', true);
+            });
+
+            filters.sets.forEach(function(set) {
+                $('#sets-filter input[name="set"][value="' + set + '"]').prop('checked', true);
+            });
 
             groupProtocolDataToggle = filters.groupByProtocol;
 

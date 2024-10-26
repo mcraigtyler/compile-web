@@ -13,49 +13,78 @@ body {
 
 /* Background Colors for Each Protocol */
 .apathy {
-    background-color: #a8a8a8 !important;
+    background-color: hsl(0, 0%, 66%) !important;
+    --shadow-color: hsl(0, 0%, 46%);
 }
+
 .darkness {
-    background-color: #7c7b72 !important;
+    background-color: hsl(54, 4%, 47%) !important;
+    --shadow-color: hsl(54, 4%, 27%);
 }
-.death{
-    background-color: #484a53 !important;
+
+.death {
+    background-color: hsl(229, 7%, 30%) !important;
+    --shadow-color: hsl(229, 7%, 10%);
 }
+
 .fire {
-    background-color: #dab188 !important;
+    background-color: hsl(30, 53%, 69%) !important;
+    --shadow-color: hsl(30, 53%, 49%);
 }
+
 .gravity {
-    background-color: #905c7a !important;
+    background-color: hsl(325, 22%, 46%) !important;
+    --shadow-color: hsl(325, 22%, 26%);
 }
+
 .hate {
-    background-color: #a84745 !important;
+    background-color: hsl(1, 42%, 46%) !important;
+    --shadow-color: hsl(1, 42%, 26%);
 }
+
 .life {
-    background-color: #abaa88 !important;
+    background-color: hsl(58, 17%, 60%) !important;
+    --shadow-color: hsl(58, 17%, 40%);
 }
+
 .light {
-    background-color: #baae9d !important;
+    background-color: hsl(35, 17%, 67%) !important;
+    --shadow-color: hsl(35, 17%, 47%);
 }
+
 .love {
-    background-color: #c17a83 !important;
+    background-color: hsl(352, 36%, 62%) !important;
+    --shadow-color: hsl(352, 36%, 42%);
 }
+
 .metal {
-    background-color: #7a716d !important;
+    background-color: hsl(18, 6%, 45%) !important;
+    --shadow-color: hsl(18, 6%, 25%);
 }
+
 .plague {
-    background-color: #698158 !important;
+    background-color: hsl(95, 19%, 43%) !important;
+    --shadow-color: hsl(95, 19%, 23%);
 }
+
 .psychic {
-    background-color: #796f86 !important;
+    background-color: hsl(266, 9%, 48%) !important;
+    --shadow-color: hsl(266, 9%, 28%);
 }
+
 .speed {
-    background-color: #909bac !important;
+    background-color: hsl(216, 14%, 62%) !important;
+    --shadow-color: hsl(216, 14%, 42%);
 }
+
 .spirit {
-    background-color: #446e75 !important;
+    background-color: hsl(189, 26%, 36%) !important;    
+    --shadow-color: hsl(189, 26%, 16%);
 }
+
 .water {
-    background-color: #a1afaf !important;
+    background-color: hsl(180, 8%, 66%) !important;
+    --shadow-color: hsl(180, 8%, 46%);
 }
 
 /* Card Sections */
@@ -71,7 +100,9 @@ body {
     padding: 10px;
     text-overflow: ellipsis;
     width: 100%;
+    font-size: 1.25em;
 }
+
 .card-section:not(:last-child) {
     border-bottom: 1px solid #e0e0e0;
 }
@@ -81,15 +112,15 @@ body {
     align-items: flex-start;
     color: white;
     display: flex;
-    padding: 5px;
 }
+
 .custom-card-title .protocol {
-    background-color: black;
+    background-color: rgb(21, 33, 48, 0.6);;
     border-radius: 5px;
     font-size: 1.15em;
     margin-right: 10px;
-    padding-bottom: 15px;
-    padding-left: 10px;
+    padding-bottom: 7px;
+    padding-left: 5px;
     padding-top: 7px;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
@@ -97,14 +128,15 @@ body {
     width: 135px;
     border: 2px solid white;
 }
+
 .custom-card-title .value {
     align-items: center;
-    background-color: black;
+    background-color: rgb(21, 33, 48, 0.6);
     border-radius: 5px;
     display: flex;
-    font-size: 2.5em;
+    font-size: 2.75em;
     justify-content: center;
-    padding: 10px;
+    padding: 13px;
     text-align: center;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
@@ -123,9 +155,12 @@ body {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: 450px;
-    width: 325px;
-    min-width: 325px;
+    height: 550px;
+    width: 381px;
+    min-width: 381px;
+    filter: drop-shadow(
+      4.01px 8.0px 8.0px var(--shadow-color)
+    );
 }
 
 .fixed-height-card .card-content {
@@ -135,12 +170,12 @@ body {
     padding: 0;
 }
 
-.blank-section{
-    background-color: rgba(255,255,255,0.5);    
+.blank-section {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .has-background {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(21, 33, 48, 0.6);
     color: white;
 }
 
@@ -155,6 +190,7 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     min-width: 900px !important;
+    margin-bottom: 20px !important;
 }
 
 .header img {
@@ -163,20 +199,95 @@ body {
     float: left;
 }
 
-#filter-form label{
+.modal-header {
+    background-color: #9154ab !important;
+    padding: 5px;
+    color: #ffffff;
+    font-size: 1.75em;
+    font-weight: bold;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.75em;
-    font-weight: bold;
 }
 
-.filter-options{
+#filter-form{
+    justify-content: center !important;
+}
+
+#filter-form label {
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    padding: 3px;
+}
+
+.filter-options {
     width: 100%;
     border: 1px solid #ffffff;
     border-radius: 15px;
 }
 
+.filter-group {
+    margin-bottom: 20px;
+    border: 1px solid #9154ab;
+    padding: 10px;
+    border-radius: 5px;
+    float: left;
+}
+
+.filter-group>div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-group legend {
+    font-family: "Orbitron", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0 5px;
+}
+
+#active-filters-count {
+    font-size: .5em !important;
+    top: 5px;
+    margin-left: 165px;
+    position: absolute;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    /* flex: 1 1 25%; */
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: #ddd;
+    border: 1px solid #484a53;
+    border-radius: 5px;
+    padding: 5px;    
+    filter: drop-shadow(2px 2px);
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 10px;
+    padding: 3px;
+}
+
+.checkbox-wrapper label:hover {
+    cursor: pointer;
+    color: #9154ab;
+}
+
+/* Default label color */
+.checkbox-wrapper label {
+    color: #000;
+    transition: color 0.3s;
+}
+
+/* Change label color when checkbox is checked */
+.checkbox-wrapper input[type="checkbox"]:checked+label {
+    color: #9154ab;
+}
 
 /* Protocol Header */
 .protocol-header {
@@ -186,6 +297,12 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     margin-top: 3px;
+}
+.protocol-header-bottom{
+    font-size: .5em;
+    margin-top: 35px;
+    position: absolute;
+    left: 30;
 }
 
 /* Section Wrapper */
@@ -199,18 +316,17 @@ body {
 .set-text {
     position: absolute;
     right: 10px;
-    top: 225px;
+    bottom: 5px;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
-    text-transform: uppercase; 
-    text-orientation: mixed;
-    writing-mode: vertical-lr;
+    text-transform: uppercase;
+    color: #ffffff;
 }
 
 
 /* Overrides */
 
-.badge{
+.badge {
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
     text-transform: uppercase;
@@ -218,56 +334,81 @@ body {
     font-size: 1.25em !important;
 }
 
-.btn{
+.btn {
     background-color: #152130 !important;
 }
 
-.card{
+.card {
     border-radius: 15px !important;
     border: 2px solid #ffffff !important;
 }
 
-.collapsible-header{    
+.collapsible-header {
     border: 2px solid #ffffff;
     border-bottom-color: #ffffff !important;
     border-radius: 15px !important;
 }
 
-.collapsible-body{
+.collapsible-body {
     margin-top: 5px;
-    background-color: rgba(47, 38, 51, 0.8);
+    background-color: hsla(282, 15%, 17%, 0.2);
+    --shadow-color: hsla(282, 15%, 7%);
     border: 2px solid #9154ab;
     border-bottom-color: #9154ab !important;
-    border-radius: 15px !important;
+    border-radius: 15px !important;    
+    filter: drop-shadow(
+      4.01px 8.0px 8.0px var(--shadow-color)
+    );
 }
 
-.container{
+.container {
     width: 90% !important;
     max-width: none !important;
 }
 
 .input-field {
- max-width: 90% !important;
- margin-left: 25px !important;
- margin-top: 10px !important;
+    max-width: 90% !important;
+    margin-left: 25px !important;
+    margin-top: 10px !important;
 }
 
-.modal{
-    width: 80% !important;
+.modal {
+    width: 650px !important;
+
+    .modal-fixed-header {
+        padding: 0;
+        height: 70%;
+
+        .modal-header {
+            position: absolute;
+            top: 0;
+        }
+
+        .modal-header {
+            border-radius: 0 0 2px 2px;
+            padding: 4px 6px;
+            height: 56px;
+            width: 100%;
+        }
+    }
 }
 
-.row{
-    display: flex !important;    
+.modal-content {
+    height: calc(100% - 75px) !important;
+}
+
+.row {
+    display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     align-items: center !important;
 }
 
-.select-wrapper{
+.select-wrapper {
     margin-bottom: 20px !important;
 }
 
-.select-dropdown{
+.select-dropdown {
     padding-top: 15px !important;
     font-family: "Orbitron", sans-serif;
     font-weight: bold;
