@@ -101,7 +101,7 @@ body {
     padding: 10px;
     text-overflow: ellipsis;
     width: 100%;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .card-section:not(:last-child) {
