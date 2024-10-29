@@ -96,11 +96,12 @@ body {
     flex: 1;
     margin-bottom: 3px;
     min-height: 33%;
+    max-height: 33%;
     overflow: hidden;
     padding: 10px;
     text-overflow: ellipsis;
     width: 100%;
-    font-size: 1.25em;
+    font-size: 1.5em;
 }
 
 .card-section:not(:last-child) {
@@ -155,9 +156,11 @@ body {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: 550px;
-    width: 381px;
-    min-width: 381px;
+    max-height: 600px;
+    min-height: 600px;
+    height: 600px;
+    width: 415px;
+    min-width: 415px;
     filter: drop-shadow(
       4.01px 8.0px 8.0px var(--shadow-color)
     );
