@@ -274,7 +274,7 @@
         "value": 1,
         "top": {
             "emphasis": "Start:",
-            "text": "You may draw 1 card. If you do, delete 1 other card, then delete this card."
+            "text": "You may draw 1 card. If you do, delete 1 other card. Then, delete this card."
         },
         "middle": {
             "emphasis": "",
@@ -384,7 +384,7 @@
         },
         "bottom": {
             "emphasis": "When this card would be covered:",
-            "text": "First, draw 1 card and flip 1 other card."
+            "text": "First, draw 1 card. Then, flip 1 other card."
         },
         "keywords": {
             "draw": true,
@@ -674,7 +674,7 @@
         },
         "middle": {
             "emphasis": "",
-            "text": "Delete your highest value card. Delete your opponent's highest value card."
+            "text": "Delete your highest value uncovered card. Delete your opponent's highest value uncovered card."
         },
         "bottom": {
             "emphasis": "",
@@ -751,16 +751,16 @@
         "protocol": "Life",
         "value": 0,
         "top": {
-            "emphasis": "",
-            "text": ""
+            "emphasis": "End:",
+            "text": "If this card is covered, delete this card."
         },
         "middle": {
             "emphasis": "",
             "text": "Play the top card of your deck face-down in each line where you have a card."
         },
         "bottom": {
-            "emphasis": "When this card would be covered:",
-            "text": "First, delete this card."
+            "emphasis": "",
+            "text": ""
         },
         "keywords": {
             "delete": true,
@@ -1152,7 +1152,7 @@
         },
         "middle": {
             "emphasis": "",
-            "text": "Draw 2 cards. Your opponent cannot compile next turn."
+            "text": "Draw 2 cards. Your opponent cannot compile on their next turn."
         },
         "bottom": {
             "emphasis": "",
