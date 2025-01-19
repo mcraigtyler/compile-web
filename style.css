@@ -300,11 +300,11 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 3px;
-    min-height: 75px;
+    min-height: 100px;
 }
 .protocol-header-bottom{
     font-size: .7em;
-    margin-top: 30px;
+    margin-top: 60px;
     position: absolute;
     margin-left: 30px;
 }
